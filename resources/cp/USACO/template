@@ -1,0 +1,28 @@
+/*
+ID: safrast1
+TASK: test
+LANG: C++11          
+*/
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <map>
+#include <stack>
+#include <queue>
+#include <algorithm>
+#include <set>
+#include <cmath>
+#include <tuple>
+#include <array>
+#include <cassert>
+
+
+int main() 
+{
+    std::ifstream fin ("test.in");
+    std::ofstream fout ("test.out");
+  
+    return 0;
+}
