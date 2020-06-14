@@ -1,3 +1,6 @@
+# Almost everything in this repo is explained in the youtube channel  https://www.youtube.com/channel/UCmaGePaRecLjqZKHtGVY83w/
+
+
 # Prerequisites
 
 ## Tools and libraries
