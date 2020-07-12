@@ -6,3 +6,4 @@ bool isTandemRepeat(std::string inputString)
     auto half = inputString.substr(0, inputString.size() / 2);
     return half + half == inputString;
 }
+	
