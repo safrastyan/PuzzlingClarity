@@ -14,7 +14,6 @@ struct Options
     /**
      * @param add_new_line whether to add a new line at the end of output or not. default true
      */    
-
     Options();
     bool add_new_line;
 
