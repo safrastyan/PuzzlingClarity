@@ -1,6 +1,6 @@
 #include "algo/Sets.hpp"
 #include "Utils/Distanes.hpp"
-#include "Utils/Printer.hpp"
+#include "io/io.hpp"
 
 #include <algorithm>
 #include <iostream>
@@ -25,8 +25,8 @@ void k_almost_equal_subsets_helper(const std::vector<int>& elems, std::vector<st
 {
     if (verbose) {
         std::cout << "Current state of buckets is " << std::endl;
-        pc::Utils::print(cur_buckets, "Bucket ");
-    }
+        pc::io::write(cur_buckets, "Bucket ");
+        }
 
     if (current ==  elems.size()) {
         auto sums = sums_of_buckets_if_valid(cur_buckets);

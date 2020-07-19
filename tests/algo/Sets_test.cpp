@@ -2,10 +2,10 @@
 #include <boost/test/unit_test.hpp>
 
 #include "algo/Sets.hpp"
-#include "Utils/Printer.hpp"
+#include "io/io.hpp"
 
 using namespace pc::algo;
-using namespace pc::Utils;
+using namespace pc::io;
 
 BOOST_AUTO_TEST_SUITE(Sets_tests)
 
@@ -21,12 +21,12 @@ BOOST_AUTO_TEST_CASE(KalmostSqualSubsets_test)
 {
     std::vector<int> a = {1, 4, 5, 5, 10, 6, 7, 7};
     auto res = k_almost_equal_subsets(a, 3);
-    print(a, "For k=3 and array ");
-    print(res, "Bucket");
+    write(a, "For k=3 and array ");
+    write(res, "Bucket");
 
     res = k_almost_equal_subsets(a, 4);
-    print(a, "For k=4 and array ");
-    print(res, "Bucket");
+    write(a, "For k=4 and array ");
+    write(res, "Bucket");
     
 
 }
