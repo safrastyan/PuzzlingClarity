@@ -35,6 +35,24 @@ inline void write(const std::vector<std::vector<int>>& obj, const std::string& s
     }
 }
 
+/// for a ahcarater matrix no spaces
+template<>
+inline void write(const std::vector<std::vector<char>>& obj, const std::string& str, std::ostream& out, Options op)
+{
+    for (int i = 0; i < obj.size(); ++i) {
+        if (str.size() != 0) {    
+            out << str << " " << i <<std::endl;
+        }
+        for (auto y: obj[i]) {
+            out << y;
+        }
+        if (op.add_new_line) {
+            out << std::endl;   
+        }    
+    }
+}
+
+
 }
 }
 
