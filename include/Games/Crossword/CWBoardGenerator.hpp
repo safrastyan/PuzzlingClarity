@@ -51,12 +51,24 @@ public:
 
 
 private:
+
+    static bool do_intersect(Node n1, Node n2); /// check if they have an intersection point
+    
+    void calculate_intersections();
+
     CWOptimalDictionary m_dict;
     std::vector<Node> m_nodes;
+    
+    std::vector<std::vector<int>> m_node_intersections; /// thos will store the intersections, those are basically the constraints for the crossword
+
+    
     CWBoardGeneratorConfig m_config; ///for adding extra constraints
     
     int m_rows;
     int m_cols;
+
+
+    //// all are for the algo
 };
 
 }

@@ -13,6 +13,8 @@ CWBoardGeneratorConfig::CWBoardGeneratorConfig(): word_count(24)
 }
 
 CWBoardGenerator::CWBoardGenerator(int rows, int cols, const std::string& path): m_dict(path)
+                                                                               , m_nodes()
+                                                                               , m_node_intersections()  
                                                                                , m_config()             
                                                                                , m_rows(rows)
                                                                                , m_cols(cols)
@@ -52,6 +54,21 @@ Board CWBoardGenerator::generate()
     return Board(); ///todo
 }
 
+
+void CWBoardGenerator::calculate_intersections()
+{
+    m_node_intersections = std::vector<std::vector<int>>(m_nodes.size());
+    for (int i = 0; i < m_nodes.size(); ++i) {
+        for (int j = 0; j < m_nodes.size(); ++j) {
+            if (i == j) {
+                continue;
+            }
+            if (do_intersect(m_nodes[i], m_nodes[j])) {
+                m_node_intersections[i].push_back(j);
+            }
+        }
+    }
+}
 
 
 }
