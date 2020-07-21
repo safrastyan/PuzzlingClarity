@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <fstream>
+#include <vector>
+#include <string>
 
 namespace pc {
 namespace io {
@@ -37,6 +39,13 @@ void write(const T& obj, const std::string& str = std::string(), std::ostream& o
         out << std::endl;
     }
 }
+
+/**
+ * Reading functions, less generic, more to the point
+ */
+
+/// Read the file line by line until the end treating all of them as strings
+std::vector<std::string> read_dictionary(std::istream& in);
 
 
 }
