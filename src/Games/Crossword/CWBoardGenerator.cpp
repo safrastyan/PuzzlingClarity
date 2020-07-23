@@ -1,11 +1,29 @@
 #include "Games/Crossword/CWBoardGenerator.hpp"
 
 #include <cassert>
+#include <algorithm>
 
 namespace pc {
 namespace games {
 namespace crossword {
 
+std::vector<std::pair<int, int>> Node::all_coords() const
+{
+    int px, py;
+    if (across) {
+        px = 0;
+        py = 1;
+    } else {
+        px = 1;
+        py = 0;
+    }
+    std::vector<std::pair<int,int>> res;
+    res.push_back(std::make_pair(row, col));
+    for (int i = 1; i < len; ++i) {
+        res.push_back(std::make_pair(res.back().first + px, res.back().second + py));  
+    }
+    return res;
+}
 CWBoardGeneratorConfig::CWBoardGeneratorConfig(): word_count(24)
                                                 , template_id(1)
 {
@@ -28,6 +46,7 @@ void CWBoardGenerator::config(CWBoardGeneratorConfig c)
 {
     m_config = c; ///unused for now
     m_nodes = template_loader(m_config.template_id);
+    calculate_intersections();
 }
 
 Board CWBoardGenerator::board_buleprint() const 
@@ -55,17 +74,41 @@ Board CWBoardGenerator::generate()
 }
 
 
+NodeIntersection CWBoardGenerator::do_intersect(Node n1, Node n2)
+{
+    ///TODO , horrible approach but this is done only once
+    NodeIntersection res;
+    res.pos1 = -1;
+    res.pos2 = -1;
+    auto cords1 = n1.all_coords();
+    auto cords2 = n2.all_coords();
+    for (int i = 0; i < cords1.size(); ++i) {
+        auto f = std::find(cords2.begin(), cords2.end(), cords1[i]);
+        if (f != cords2.end()) {
+            res.pos1 = i;
+            res.pos2 = f - cords2.begin();
+            break;
+        }
+    }
+    return res;
+
+}
+
 void CWBoardGenerator::calculate_intersections()
 {
-    m_node_intersections = std::vector<std::vector<int>>(m_nodes.size());
+    m_node_intersections = std::vector<std::vector<NodeIntersection>>(m_nodes.size());
     for (int i = 0; i < m_nodes.size(); ++i) {
         for (int j = 0; j < m_nodes.size(); ++j) {
             if (i == j) {
                 continue;
             }
-            if (do_intersect(m_nodes[i], m_nodes[j])) {
-                m_node_intersections[i].push_back(j);
+            auto res = do_intersect(m_nodes[i], m_nodes[j]);
+            if (res.pos1 == -1) {
+                continue;
             }
+            res.node1_id = i;
+            res.node2_id = j;
+            m_node_intersections[i].push_back(res);
         }
     }
 }

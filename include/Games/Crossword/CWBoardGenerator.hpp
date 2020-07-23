@@ -22,6 +22,17 @@ struct Node
     /// if false then this word is vertical
     bool across;
     
+    /// returns a list of pairs of all coordinates which this node occuipes
+    std::vector<std::pair<int, int>> all_coords() const;
+};
+
+struct NodeIntersection
+{
+    int node1_id;
+    int node2_id;
+    int pos1;
+    int pos2;
+
 };
 
 
@@ -48,18 +59,16 @@ public:
     Board board_buleprint() const;
     Board generate();
 
-
-
 private:
 
-    static bool do_intersect(Node n1, Node n2); /// check if they have an intersection point
+    static NodeIntersection do_intersect(Node n1, Node n2); /// check if they have an intersection point
     
     void calculate_intersections();
 
     CWOptimalDictionary m_dict;
     std::vector<Node> m_nodes;
     
-    std::vector<std::vector<int>> m_node_intersections; /// thos will store the intersections, those are basically the constraints for the crossword
+    std::vector<std::vector<NodeIntersection>> m_node_intersections; /// those will store the intersections, those are basically the constraints for the crossword
 
     
     CWBoardGeneratorConfig m_config; ///for adding extra constraints

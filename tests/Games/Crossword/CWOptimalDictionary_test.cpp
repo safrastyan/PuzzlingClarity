@@ -34,11 +34,11 @@ BOOST_AUTO_TEST_CASE(serializations_test)
     
     BOOST_CHECK(d->m_id_to_word[d->m_word_to_id[w]] == w);
 
-    d->serialize_pos_to_letter_list();
+    d->serialize_len_pos_letter_set();
     w = d->random_word();
     int id = d->m_word_to_id[w];
     for (int i = 0; i < w.size(); ++i) {
-        auto& vec = d->m_pos_letter_list[w[i] - 'a'][i];
+        auto& vec = d->m_len_pos_letter_set[w.size()][i][w[i] - 'a'];
         auto f = std::find(vec.begin(), vec.end(), id);
         BOOST_CHECK(f != vec.end());
     }

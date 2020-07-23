@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <set>
 
 namespace pc {
 namespace games {
@@ -18,7 +19,7 @@ public:
     CWOptimalDictionary(const std::string& path);
     
     void serialize_word_to_id();
-    void serialize_pos_to_letter_list();
+    void serialize_len_pos_letter_set();
 
     /// returns word_count
     int word_count() const;
@@ -35,7 +36,7 @@ private:
     std::map<std::string, int> m_word_to_id;
     
     /// this is a big one
-    std::vector<std::vector<std::vector<int>>> m_pos_letter_list;
+    std::vector<std::vector<std::vector<std::set<int>>>> m_len_pos_letter_set;
 
     int m_longst_word_len;
 };
