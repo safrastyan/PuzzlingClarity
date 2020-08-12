@@ -67,5 +67,16 @@ std::vector<std::vector<int>> k_almost_equal_subsets(const std::vector<int>& a, 
 
 }
 
+void intersect_with(std::set<int>& s1, const std::set<int>& s2)
+{
+    std::set<int> res;
+    for (auto s: s1) {
+        if (s2.find(s) != s2.end()) {
+            res.insert(s);
+        }
+    }
+    s1 = res;
+}
+
 }
 }

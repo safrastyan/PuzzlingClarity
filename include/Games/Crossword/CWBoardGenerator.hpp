@@ -59,11 +59,19 @@ public:
     Board board_buleprint() const;
     Board generate();
 
+
 private:
 
     static NodeIntersection do_intersect(Node n1, Node n2); /// check if they have an intersection point
     
     void calculate_intersections();
+
+    
+    /// main logic
+    void helper(std::vector<int>&, std::set<int>&, std::vector<int>&, bool verbose = false);
+
+    void debug_dump(std::vector<int>&);
+
 
     CWOptimalDictionary m_dict;
     std::vector<Node> m_nodes;
@@ -73,6 +81,8 @@ private:
     
     CWBoardGeneratorConfig m_config; ///for adding extra constraints
     
+    /// indicatpr that the helper should stop working because it has found
+    bool m_should_terminate;
     int m_rows;
     int m_cols;
 

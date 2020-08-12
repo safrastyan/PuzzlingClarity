@@ -42,6 +42,8 @@ BOOST_AUTO_TEST_CASE(serializations_test)
         auto f = std::find(vec.begin(), vec.end(), id);
         BOOST_CHECK(f != vec.end());
     }
+
+    BOOST_CHECK(d->all_words_for_len(4).size() != 0);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

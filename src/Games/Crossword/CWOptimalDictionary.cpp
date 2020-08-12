@@ -12,6 +12,7 @@ namespace crossword {
 CWOptimalDictionary::CWOptimalDictionary(const std::string& path): m_id_to_word()
                                                                  , m_word_to_id()
                                                                  , m_len_pos_letter_set()
+                                                                 , m_len_set()
 {
     std::ifstream fin(path);
     auto words = io::read_dictionary(fin);
@@ -50,6 +51,11 @@ void CWOptimalDictionary::serialize_len_pos_letter_set()
         for (int j = 0; j < s.size(); ++j) {
             m_len_pos_letter_set[s.size()][j][s[j] - 'a'].insert(i);
         }
+    }
+
+    m_len_set = std::vector<std::set<int>>(m_longst_word_len + 1);
+    for (int i = 0; i < m_id_to_word.size(); ++i) {
+        m_len_set[m_id_to_word[i].size()].insert(i);
     }
 }
 

@@ -58,7 +58,10 @@ BOOST_AUTO_TEST_CASE(do_intersect_node_test)
 BOOST_AUTO_TEST_CASE(node_intersections_test)
 {
     std::cout << "Testing intersections" << std::endl;
+    int x = 0;
     for (auto& inters: g->m_node_intersections) {
+        std::cout << "For " << x << " node " << std::endl;
+        ++x;
         for (auto& inter: inters) {
             std::cout << inter.node1_id << " " << inter.node2_id << " " << inter.pos1 << " " << inter.pos2 << std::endl;
         }

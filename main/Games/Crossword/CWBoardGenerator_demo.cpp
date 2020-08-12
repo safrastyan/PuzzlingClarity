@@ -9,7 +9,7 @@ using namespace pc::io;
 
 int main()
 {
-
+    std::srand(time(0));
     CWBoardGenerator g(13, 13, linx_standard_dictionary_path());
     CWBoardGeneratorConfig c;
     c.template_id = 1;
@@ -19,5 +19,11 @@ int main()
     std::cout << "Board is " << std::endl;
     
     auto res =  g.generate();
+    for (auto& row: res) {
+        for (auto c: row) {
+            std::cout << c;
+        }
+        std::cout << std::endl;
+    }
     write(res, "Board is");
 }

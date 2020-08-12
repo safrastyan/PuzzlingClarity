@@ -1,7 +1,9 @@
 #include "Games/Crossword/CWBoardGenerator.hpp"
+#include "algo/Sets.hpp"
 
 #include <cassert>
 #include <algorithm>
+#include <iostream>
 
 namespace pc {
 namespace games {
@@ -46,7 +48,17 @@ void CWBoardGenerator::config(CWBoardGeneratorConfig c)
 {
     m_config = c; ///unused for now
     m_nodes = template_loader(m_config.template_id);
+
+    std::sort(m_nodes.begin(), m_nodes.end(), 
+    [](const Node& a, const Node& b) -> bool
+    {    
+        return a.len > b.len; 
+    });
+
     calculate_intersections();
+    m_dict.serialize_word_to_id();
+    m_dict.serialize_len_pos_letter_set();
+
 }
 
 Board CWBoardGenerator::board_buleprint() const 
@@ -70,7 +82,21 @@ Board CWBoardGenerator::board_buleprint() const
 }
 Board CWBoardGenerator::generate()
 {
-    return Board(); ///todo
+    m_should_terminate = false;
+    std::vector<int> word_id_for_node;
+    std::set<int> used_words;
+    std::vector<int> temp;
+    helper(temp, used_words, word_id_for_node, true);
+
+    Board b(m_rows, std::vector<char>(m_cols, '*'));
+    for (int i = 0; i < word_id_for_node.size(); ++i) {
+        auto w = m_dict.word_by_id(word_id_for_node[i]);
+        auto cords = m_nodes[i].all_coords();
+        for (int j = 0; j < cords.size(); ++j) {
+            b[cords[j].first][cords[j].second] = w[j]; 
+        }
+    }
+    return b;
 }
 
 
@@ -113,12 +139,83 @@ void CWBoardGenerator::calculate_intersections()
     }
 }
 
+void CWBoardGenerator::helper(std::vector<int>& word_id_for_node, std::set<int>& used, std::vector<int>& found, bool verbose)
+{
+    if (verbose) {
+        debug_dump(word_id_for_node);
+    }
+
+    if (m_should_terminate) {
+        return;
+    }
+    if (word_id_for_node.size() == m_nodes.size()) {
+        m_should_terminate = true;
+        found = word_id_for_node;
+        return;
+    }
+
+    int cur = word_id_for_node.size();
+    Node cur_node = m_nodes[cur];
+    auto all_candids = m_dict.all_words_for_len(cur_node.len);
+    for (auto& inter: m_node_intersections[cur]) {
+        if (inter.node2_id >= word_id_for_node.size()) {
+            continue;
+        }
+        const auto& word = m_dict.word_by_id(word_id_for_node[inter.node2_id]);
+        int letter = word[inter.pos2] - 'a';
+        algo::intersect_with(all_candids, m_dict.set_by_len_pos_letter(cur_node.len, inter.pos2, letter));
+    }
+
+    /// bad randomization
+    std::vector<int> very_bad;
+    for (auto i: all_candids) {
+        very_bad.push_back(i);
+    }
+    std::random_shuffle(very_bad.begin(), very_bad.end());
+    all_candids.clear();
+    for (int i = 0; i < std::min(very_bad.size(), size_t(30)) ; ++i) {
+        all_candids.insert(very_bad[i]);
+    }
+  
+  
+
+    /// add and backtrack
+    
+    for (auto id: all_candids) {
+        word_id_for_node.push_back(id);
+        used.insert(id);
+        helper(word_id_for_node, used, found, verbose);
+        used.erase(id);
+        word_id_for_node.pop_back();
+    }
+}
+
+void CWBoardGenerator::debug_dump(std::vector<int>& word_id_for_node)
+{
+    Board b(m_rows, std::vector<char>(m_cols, '*'));
+    for (int i = 0; i < word_id_for_node.size(); ++i) {
+        auto w = m_dict.word_by_id(word_id_for_node[i]);
+        auto cords = m_nodes[i].all_coords();
+        for (int j = 0; j < cords.size(); ++j) {
+            b[cords[j].first][cords[j].second] = w[j]; 
+        }
+    }
+    std::cout << "Size " << word_id_for_node.size() << std::endl;
+    for (auto& r: b) {
+        for (auto c: r) {
+            std::cout << c;
+        }
+        
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+}
+
+
 
 }
 }
 }
-
-
 
 
 
