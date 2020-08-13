@@ -2,8 +2,10 @@
 #include <boost/test/unit_test.hpp>
 
 #include "algo/Numbers.hpp"
+#include "Comparators/Comparators.hpp"
 
 using namespace pc::algo;
+using namespace pc::Comparators;
 
 BOOST_AUTO_TEST_SUITE(Numbers_tests)
 
@@ -91,6 +93,14 @@ BOOST_AUTO_TEST_CASE(to_roman_test)
     BOOST_CHECK_EQUAL(to_roman(1), "I");
     BOOST_CHECK_EQUAL(to_roman(4), "IV");
     BOOST_CHECK_EQUAL(to_roman(9), "IX");
+}
+
+BOOST_AUTO_TEST_CASE(sieve_prime_numbers_test)
+{
+    std::vector<int> r1 = {2, 3, 5, 7};
+    for (int i = 7; i <= 10; ++i) {
+        BOOST_CHECK(is_same(r1, sieve_prime_numbers(i)));
+    }
 }
 
 BOOST_AUTO_TEST_SUITE_END()
