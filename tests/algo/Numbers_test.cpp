@@ -103,4 +103,10 @@ BOOST_AUTO_TEST_CASE(sieve_prime_numbers_test)
     }
 }
 
+BOOST_AUTO_TEST_CASE(gcd_tmp_test)
+{
+    int x = gcd_tmp<15, 10>::val;
+    BOOST_CHECK_EQUAL(gcd(15, 10), x);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

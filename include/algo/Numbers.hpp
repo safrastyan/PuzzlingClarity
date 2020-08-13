@@ -39,5 +39,12 @@ std::string to_roman(int n);
 /// The sieve of eratostenes. Generates and return all the prime numbers from 1 to n included
 std::vector<int> sieve_prime_numbers(int n);
 
+
+/// templated version of calculating the gcd, always A should be bigger than B
+template<int A, int B>
+class gcd_tmp;
+
 }
 }
+
+#include "Numbers_impl.hpp"
