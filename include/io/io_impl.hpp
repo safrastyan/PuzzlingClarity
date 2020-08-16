@@ -53,6 +53,31 @@ inline void write(const std::vector<std::vector<char>>& obj, const std::string& 
 }
 
 
+
+template<typename T>
+inline std::vector<T> read_array(std::istream& in)
+{
+    int n;
+    in >> n;
+    std::vector<T> a(n);
+    for (int i = 0; i < n; ++i) {
+        in >> a[i];
+    }
+    return a;
+}
+
+/// Read array with unknown number of elements. AKA the whole input and return. 
+template<typename T>
+std::vector<T> read_array_u(std::istream& in)
+{
+    std::vector<T> a;
+    T x;
+    while (in >> x) {
+        a.push_back(x);
+    }
+    return a;
+}
+
 }
 }
 

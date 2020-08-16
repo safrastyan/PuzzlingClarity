@@ -6,21 +6,17 @@ namespace pc {
 namespace base {
 namespace paths {
 
-inline std::string pc_path()
-{
-    return getenv("PCPATH");
-}
 
-inline std::string resources_path()
-{
-    return pc_path() + "/resources";
-}
+std::string pc_path();
+std::string resources_path();
+std::string tests_path();
+std::string algo_tests_path();
+std::string io_tests_path();
+std::string linx_standard_dictionary_path();
 
-inline std::string linx_standard_dictionary_path() 
-{
-    return "/usr/share/dict/american-english";
-}
 
 }
 }
 }
+
+#include "Paths_impl.hpp"
