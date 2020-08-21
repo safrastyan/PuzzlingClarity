@@ -10,7 +10,7 @@ using namespace pc::Time;
 
 int main()
 {
-    auto a = pc::Generators::ArrayFrom1toN(1000000, 100);
+    auto a = pc::Generators::array_from_1_to_n(1000000, 100);
     push();
     for (int i = 1000000; i >= 1000000 - 1000; --i) {
         auto f = std::find(a.begin(), a.end(), i * 100);

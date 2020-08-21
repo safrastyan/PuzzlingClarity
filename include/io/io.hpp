@@ -47,6 +47,11 @@ void write(const T& obj, const std::string& str = std::string(), std::ostream& o
 /// Read the file line by line until the end treating all of them as strings
 std::vector<std::string> read_dictionary(std::istream& in);
 
+
+/// Read one thing, number, string, float.
+template<typename T>
+T read_one(std::istream&);
+
 /// Read an array where the first input comes as a number of the elements, and the test are the elements themselves. 
 template<typename T>
 std::vector<T> read_array(std::istream&);

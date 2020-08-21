@@ -10,8 +10,10 @@ namespace Generators {
  * @param n up to the number n
  * @param mulitplier multiplies all elements by multiplier, default = 1
  **/
-std::vector<int> ArrayFrom1toN(int n, int multiplier=1);
+std::vector<int> array_from_1_to_n(int n, int multiplier=1);
 
+/// uniform random array
+std::vector<int> random_array(int n);
 
 }
 }

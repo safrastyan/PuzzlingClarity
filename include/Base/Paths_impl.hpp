@@ -35,6 +35,11 @@ inline std::string linx_standard_dictionary_path()
     return "/usr/share/dict/american-english";
 }
 
+inline std::string tasks_test_path()
+{
+    return tests_path() + "/tasks";
+}
+
 }
 }
 }

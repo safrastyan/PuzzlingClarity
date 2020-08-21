@@ -53,6 +53,13 @@ inline void write(const std::vector<std::vector<char>>& obj, const std::string& 
 }
 
 
+template<typename T>
+T read_one(std::istream& in)
+{
+    T x;
+    in >> x;
+    return x;
+}
 
 template<typename T>
 inline std::vector<T> read_array(std::istream& in)
