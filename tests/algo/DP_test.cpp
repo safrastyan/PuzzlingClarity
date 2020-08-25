@@ -41,13 +41,8 @@ BOOST_AUTO_TEST_CASE(knapsack_classic_test)
         std::fstream input(path + std::to_string(t) + ".in");        
         std::fstream output(path + std::to_string(t) + ".out");
         auto k = read_one<int>(input);
-        auto n = read_one<int>(input);
+        auto elems = read_array<int, int>(input);
         auto ans = read_one<int>(output);
-        std::vector<std::pair<int, int>> elems(n);
-        for (int i = 0; i < n; ++i) {
-            elems[i].first = read_one<int>(input);
-            elems[i].second = read_one<int>(input);
-        }
         BOOST_CHECK_EQUAL(knapsack_classic(elems, k), ans);
     }
 }

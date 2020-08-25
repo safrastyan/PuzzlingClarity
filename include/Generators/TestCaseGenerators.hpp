@@ -2,6 +2,7 @@
 
 /**
  * This file is for generators for test cases 
+ * So the test case generator is kind of like the opposite of running of the test cases. Because the generator should trust the functon it is using for generating the test cases or else the whole thing will turn into one big bullshit
  **/
 
 #include <string>

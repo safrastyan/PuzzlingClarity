@@ -61,6 +61,10 @@ std::vector<T> read_array(std::istream&);
 template<typename T>
 std::vector<T> read_array_u(std::istream&);
 
+/// Read an array where the first input comes as a number of elements, after thait pairs of elements, correspndingly wiht type T and U
+template<typename T, typename U>
+std::vector<std::pair<T, U>> read_array(std::istream&); 
+
 }
 }
 
