@@ -18,5 +18,31 @@ std::vector<int> sliding_window_sums(const std::vector<int>& elems,  int k)
     return res;
 }
 
+std::vector<int> sliding_window_unique_chars(const std::string& s, int k)
+{
+    int cur = 0;
+    std::vector<int> m(256, 0); ///mapping the chars, maximum 256 for this case
+    for (int i = 0; i < k; ++i) {
+        if (m[s[i]] == 0) {
+            ++cur;
+        }
+        ++m[s[i]];
+    }
+    std::vector<int> res;
+    res.push_back(cur);
+    for (int i = k; i < s.size(); ++i) {
+        if (m[s[i - k]] == 1) {
+            --cur;
+        }
+        --m[s[i - k]];
+        if (m[s[i]] == 0) {
+            ++cur;
+        }
+        ++m[s[i]];
+        res.push_back(cur);
+    }
+    return res;
+}
+
 }
 }

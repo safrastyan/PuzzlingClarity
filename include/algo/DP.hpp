@@ -25,5 +25,6 @@ int knapsack_infinte_elements(const std::vector<int>& elems, int k);
  * @param k the maximum capacity of the knapsack, weightwise
  **/
 int knapsack_classic(const std::vector<std::pair<int, int>>& elems, int k);
+
 }
 }

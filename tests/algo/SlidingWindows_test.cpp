@@ -6,6 +6,7 @@
 #include "io/io.hpp"
 #include "Comparators/Comparators.hpp"
 #include "Generators/ArrayGenerators.hpp"
+#include "Generators/TextGenerators.hpp"
 
 using namespace pc::algo;
 using namespace pc::base::paths;
@@ -42,6 +43,24 @@ BOOST_AUTO_TEST_CASE(sliding_window_sums_test)
         
         }
         BOOST_CHECK(is_same(res1, res));
+    }
+}
+
+BOOST_AUTO_TEST_CASE(sliding_window_unique_chars_test)
+{
+    for (int t = 0; t < 10; ++t) {
+        int n = 1000;
+        int k = 50;
+        std::vector<int> res1;
+        auto s = pc::Generators::random_string_alnum(n);
+        for (int i = 0; i + k <= n; ++i) {
+            auto cp = s.substr(i, k);
+            std::sort(cp.begin(), cp.end());
+            auto u = std::unique(cp.begin(), cp.end());
+            res1.push_back(u - cp.begin());
+        }
+
+        BOOST_CHECK(is_same(res1, sliding_window_unique_chars(s, k)));
     }
 }
 
