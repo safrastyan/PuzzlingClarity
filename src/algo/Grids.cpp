@@ -67,9 +67,11 @@ Grid mirror_horizontal(const Grid& grid)
     return res;
 }
 
-/*Coords Grid::connected_component(int x, int y) const
+Coords connected_component(const Grid& g, int x, int y)
 { 
-    char ch = data[x][y];
+    char ch = g[x][y];
+    int r = g.size();
+    int c = g[0].size();
     std::vector<std::vector<char>> visited(r, std::vector<char>(c, 0));
     std::queue<std::pair<int, int>> q;
     std::vector<std::pair<int, int>> res;
@@ -85,7 +87,7 @@ Grid mirror_horizontal(const Grid& grid)
         for (int i = 0; i < 4; ++i) {
             int nx = cx + px[i];
             int ny = cy + py[i];
-            if (nx < r && ny < c && nx >= 0 && ny >= 0 && visited[nx][ny] == 0 && data[nx][ny] == ch) {
+            if (nx < r && ny < c && nx >= 0 && ny >= 0 && visited[nx][ny] == 0 && g[nx][ny] == ch) {
                 visited[nx][ny] = 1;
                 q.push(std::make_pair(nx, ny));
                 res.push_back(std::make_pair(nx, ny));
@@ -95,30 +97,42 @@ Grid mirror_horizontal(const Grid& grid)
     return res;
 }
 
-void Grid::fill_connected_component(int x, int y, char with)
+void fill_connected_component(Grid& g, int x, int y, char with)
 {
-    auto coords = connected_component(x, y);
-    fill(coords, with);
-}
-    
-void Grid::fill(Coords c, char with)
-{
-    for (const auto& p: c) {
-        data[p.first][p.second] = with;
+    auto coords = connected_component(g, x, y);
+    for (const auto& p: coords) {
+        g[p.first][p.second] = with;
     }
 }
 
-
 std::ostream& operator << (std::ostream& o, const Grid& g)
 {
-    for (int i = 0; i < g.r; ++i) {
-        for (int j = 0; j < g.c; ++j) {
-            o << g.data[i][j];
+    for (int i = 0; i < g.size(); ++i) {
+        for (int j = 0; j < g[0].size(); ++j) {
+            o << g[i][j];
         }
         o << std::endl;
     }
     return o;
 }
-*/
+
+bool operator == (const Grid& g1, const Grid& g2)
+{
+    if (g1.size() != g2.size()) {
+        return false;
+    }
+    for (int i = 0; i < g1.size(); ++i) {
+        if (g1[i].size() != g2.size()) {
+            return false;
+        }
+        for (int j = 0; j < g1[i].size(); ++j) {
+            if (g1[i][j] != g2[i][j]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 }
 }

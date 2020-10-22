@@ -7,43 +7,23 @@ namespace pc {
 namespace algo {
 
 /// the basic representation of graph, list of indices for each row indicating connected
-using Graph=std::vector<std::vector<int>>;
 using Grid=std::vector<std::vector<char>>;
+/// All cooordinates are always represented as ROW FIRST COL SECOND
+using Coords=std::vector<std::pair<int, int>>;
 
+
+/// Those are basic transformation functions
 Grid rotate_90_clockwise(const Grid&);
 Grid rotate_180_clockwise(const Grid&);
 Grid rotate_270_clockwise(const Grid&);
 Grid mirror_horizontal(const Grid&);
 
-using Coords=std::vector<std::pair<int, int>>;
 
-/// all the cooridnates are always row-first
-/*class Grid
-{
-public:
-    Grid(int r, int c);
-    Grid(int r, int c, char fill_with);
-    Grid(const std::vector<std::vector<char>>&);
+/// return the connected component connected to position (x, y)
+Coords connected_component(const Grid& , int x, int y);
 
-    Grid rotate_90_clockwise() const;
-    Grid rotate_180_clockwise() const;
-    Grid rotate_270_clockwise() const;
-    Grid mirror_horizontal() const;
-
-    /// get the cooridnates of the connected component starting from the given coordinate
-    Coords connected_component(int x, int y) const;
-
-    /// fill connected component with the given coords with the character 'with'
-    void fill_connected_component(int x, int y, char with);
-    
-    /// just fill the given cooridnates with the char with
-    void fill(Coords c, char with);
-
-
-    std::vector<std::vector<char>> data;
-    int r;
-    int c;
-};*/
+/// fill connected component with the given coords with the character 'with'
+void fill_connected_component(Grid& g, int x, int y, char with);
 
 bool operator == (const Grid& g1, const Grid& g2);
 

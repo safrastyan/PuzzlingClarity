@@ -10,6 +10,19 @@ using namespace pc::Comparators;
 BOOST_AUTO_TEST_SUITE(Graph_tests)
 
 
+BOOST_AUTO_TEST_CASE(Grid_equality_check_check)
+{
+    Grid g(std::vector<std::vector<char>>{ {'1', '2', '3'}, 
+                                         {'4', '5', '6'} , 
+                                         {'7', '8', '9'}  });
+    auto g2 = g;
+    BOOST_CHECK(g == g2);
+    g[0][0] = 'x';
+    BOOST_CHECK(!(g == g2));
+    g[0][0] = '1';
+    g[1].pop_back();
+    BOOST_CHECK(!(g == g2));
+}
 BOOST_AUTO_TEST_CASE(Grid_rotate_90_clockwise)
 {
     const Grid g(std::vector<std::vector<char>>{ {'1', '2', '3'}, 
@@ -79,17 +92,32 @@ BOOST_AUTO_TEST_CASE(Grid_mirror_horizontal)
 
 BOOST_AUTO_TEST_CASE(Grid_connected_component)
 {
+    Grid g(std::vector<std::vector<char>>{ {'2', '2', '2'}, 
+                                                 {'6', '2', '4'} , 
+                                                 {'9', '2', '7'}  });
+    auto c = connected_component(g, 0, 0);
+    BOOST_CHECK_EQUAL(c.size(), 5);
+    BOOST_CHECK(std::find(c.begin(), c.end(), std::make_pair(0, 0)) != c.end());
+    BOOST_CHECK(std::find(c.begin(), c.end(), std::make_pair(0, 1)) != c.end());
+    BOOST_CHECK(std::find(c.begin(), c.end(), std::make_pair(1, 1)) != c.end());
+    BOOST_CHECK(std::find(c.begin(), c.end(), std::make_pair(0, 2)) != c.end());
+    BOOST_CHECK(std::find(c.begin(), c.end(), std::make_pair(2, 1)) != c.end());   
 
-}
+}   
 
 BOOST_AUTO_TEST_CASE(Grid_fill_connected_component)
 {
-    
+    Grid g(std::vector<std::vector<char>>{ {'2', '2', '2'}, 
+                                             {'6', '2', '4'} , 
+                                             {'9', '2', '7'}  });  
+
+    Grid cor(std::vector<std::vector<char>>{ {'x', 'x', 'x'}, 
+                                             {'6', 'x', '4'} , 
+                                             {'9', 'x', '7'}  });  
+    fill_connected_component(g, 0, 0, 'x');
+    BOOST_CHECK(g == cor);
 }
 
-BOOST_AUTO_TEST_CASE(Grid_fill)
-{
-    
-}
+
 
 BOOST_AUTO_TEST_SUITE_END()
