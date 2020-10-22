@@ -5,18 +5,16 @@ namespace pc {
 namespace Comparators {
 
 template<>
-bool is_same(const std::vector<int>& a, const std::vector<int>& b)
+bool is_same(const std::vector<std::vector<char>>& a, const std::vector<std::vector<char>>& b)
 {
     if (a.size() != b.size()) {
         return false;
     }
     for (int i = 0; i < a.size(); ++i) {
-        if (a[i] != b[i]) {
-            return false;
-        }
+       // if (a[i].size() != b[i].size())
     }
-    return true;
 }
+
 
 }
 }

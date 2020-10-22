@@ -7,12 +7,18 @@ namespace pc {
 namespace algo {
 
 /// the basic representation of graph, list of indices for each row indicating connected
-using Graph_t=std::vector<std::vector<int>>;
-/// conrdinates
+using Graph=std::vector<std::vector<int>>;
+using Grid=std::vector<std::vector<char>>;
+
+Grid rotate_90_clockwise(const Grid&);
+Grid rotate_180_clockwise(const Grid&);
+Grid rotate_270_clockwise(const Grid&);
+Grid mirror_horizontal(const Grid&);
+
 using Coords=std::vector<std::pair<int, int>>;
 
 /// all the cooridnates are always row-first
-class Grid
+/*class Grid
 {
 public:
     Grid(int r, int c);
@@ -37,7 +43,7 @@ public:
     std::vector<std::vector<char>> data;
     int r;
     int c;
-};
+};*/
 
 bool operator == (const Grid& g1, const Grid& g2);
 

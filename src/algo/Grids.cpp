@@ -1,102 +1,73 @@
-#include "algo/Graphs.hpp"
+#include "algo/Grids.hpp"
 
 #include <queue>
 #include <cassert>
 
-
 namespace pc {
 namespace algo {
 
-bool operator == (const Grid& g1, const Grid& g2)
-{
-    if (g1.r != g2.r || g1.c != g2.c) {
-        return false;
-    }
 
-    for (int i = 0; i < g1.r; ++i) {
-        for (int j = 0; j < g1.c; ++j) {
-            if (g1.data[i][j] != g2.data[i][j]) {
-                return false;
-            }
-        }
-    }
-
-    return true;
-}
-
-Grid::Grid(int r_, int c_): data(r_, std::vector<char>(c_))
-                          , r(r_)
-                          , c(c_)
-{}
-
-Grid::Grid(int r_, int c_, char fill_with): data(r_, std::vector<char>(c_, fill_with))
-                                          , r(r_)
-                                          , c(c_)
-{}
-
-Grid::Grid(const std::vector<std::vector<char>>& d): data(d)
-                                                   , r(d.size())
-                                                   , c(d[0].size())
-{}                                                         
-
-Grid Grid::rotate_90_clockwise() const
+Grid rotate_90_clockwise(const Grid& grid)
 {
     ///supports square for now
-    assert(r == c);
-    Grid g(data);
+    auto res = grid;
+    int r = grid.size();
+    int c = grid[0].size();
+    
+    for (int i = 0; i < r; ++i) {
+        for (int j = 0; j < c; ++j) {
+            res[j][c - i - 1] = grid[i][j];
+        }
+    }
+    return res;
+}
+
+Grid rotate_180_clockwise(const Grid& grid)
+{
+    ///supports square for now
+    
+    Grid res = grid;
+    int r = grid.size();
+    int c = grid[0].size();
+    for (int i = 0; i < r; ++i) {
+        for (int j = 0; j < c; ++j) {
+            res[r - i - 1][c - j - 1] = grid[i][j];
+        }
+    }
+    return res;
+}
+
+
+Grid rotate_270_clockwise(const Grid& grid)
+{
+    ///supports square for now
+    Grid res = grid;
+    int r = grid.size();
+    int c = grid[0].size();
+    for (int i = 0; i < r; ++i) {
+        for (int j = 0; j < c; ++j) {
+            res[r - j - 1][i] = grid[i][j];
+        }
+    }
+    return res;
+}
+
+Grid mirror_horizontal(const Grid& grid)
+{
+    ///supports square for now
+    Grid res = grid;
+    int r = grid.size();
+    int c = grid[0].size();
 
     for (int i = 0; i < r; ++i) {
         for (int j = 0; j < c; ++j) {
-            g.data[j][c - i - 1] = data[i][j];
+            res[i][c - j - 1] = grid[i][j];
         }
     }
-    return g;
+    return res;
 }
 
-Grid Grid::rotate_180_clockwise() const
-{
-    ///supports square for now
-    assert(r == c);
-    Grid g(data);
-
-    for (int i = 0; i < r; ++i) {
-        for (int j = 0; j < c; ++j) {
-            g.data[r - i - 1][c - j - 1] = data[i][j];
-        }
-    }
-    return g;
-}
-
-
-Grid Grid::rotate_270_clockwise() const
-{
-    ///supports square for now
-    assert(r == c);
-    Grid g(data);
-
-    for (int i = 0; i < r; ++i) {
-        for (int j = 0; j < c; ++j) {
-            g.data[r - j - 1][i] = data[i][j];
-        }
-    }
-    return g;
-}
-
-Grid Grid::mirror_horizontal() const
-{
-    ///supports square for now
-    assert(r == c);
-    Grid g(data);
-
-    for (int i = 0; i < r; ++i) {
-        for (int j = 0; j < c; ++j) {
-            g.data[i][c - j - 1] = data[i][j];
-        }
-    }
-    return g;
-}
-
-Coords Grid::connected_component(int x, int y) const
+/*Coords Grid::connected_component(int x, int y) const
 { 
     char ch = data[x][y];
     std::vector<std::vector<char>> visited(r, std::vector<char>(c, 0));
@@ -148,6 +119,6 @@ std::ostream& operator << (std::ostream& o, const Grid& g)
     }
     return o;
 }
-
+*/
 }
 }
