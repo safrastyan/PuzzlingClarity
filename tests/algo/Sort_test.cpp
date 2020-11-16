@@ -67,7 +67,7 @@ BOOST_AUTO_TEST_CASE(bucket_sort_test)
 
 BOOST_AUTO_TEST_CASE(merge_sort_test)
 {
-    auto ans = sort_test_helper(1000, 200, merge_sort);
+    auto ans = sort_test_helper(100, 20000, merge_sort);
     for (auto b: ans) {
         BOOST_CHECK(b);
     }

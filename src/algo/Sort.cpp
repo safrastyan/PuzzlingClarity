@@ -92,7 +92,7 @@ std::vector<int> bucket_sort(const std::vector<int>& arr, int max_element)
 std::vector<int> merge_sort(const std::vector<int>& arr)
 {
     auto res = arr;
-    merge_sort_rec(res, 0, res.size());
+    merge_sort_rec(res, 0, res.size() - 1);
     return res;
 }
 
