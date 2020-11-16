@@ -50,4 +50,17 @@ BOOST_AUTO_TEST_CASE(median_of_array_divided_into_2_sorted_arrays_test)
 
 }
 
+BOOST_AUTO_TEST_CASE(significant_inversion_count_test)
+{
+    write("Testing significant inversion count");
+    int test_count = 40;
+    for (int i = 0; i < test_count; ++i) {
+        int n = 1000;
+        auto arr = random_array(n);
+        auto g_res = significant_inversion_count(arr);
+        auto b_res = significant_inversion_count_bad(arr);
+        BOOST_CHECK_EQUAL(g_res, b_res);
+    }
+}
+
 BOOST_AUTO_TEST_SUITE_END()

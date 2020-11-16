@@ -14,7 +14,6 @@ int median_of_2_helper(const std::vector<int>& half1, int half1_left, int half1_
         res.insert(res.end(), half2.begin() + half2_left, half2.begin() + half2_right + 1);
         std::sort(res.begin(), res.end());
         
-
         return res[res.size() / 2 - 1];
     } 
     int len = half1_right - half1_left + 1;
@@ -36,6 +35,24 @@ namespace algo {
 int median_of_array_divided_into_2_sorted_arrays(const std::vector<int>& p1, const std::vector<int>& p2)
 {
     return median_of_2_helper(p1, 0, p1.size() - 1, p2, 0, p2.size() - 1);
+}
+
+int significant_inversion_count(const std::vector<int>& a)
+{
+    return 0;
+}
+
+int significant_inversion_count_bad(const std::vector<int>& a)
+{
+    int res = 0;
+    for (int i = 0; i < a.size() - 1; ++i) {
+        for (int j = i + 1; j < a.size(); ++j) {
+            if (a[i] < a[j] * 2) {
+                ++res;
+            }
+        }   
+    }
+    return res;
 }
 
 }
