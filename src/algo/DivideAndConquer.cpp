@@ -1,4 +1,5 @@
 #include "algo/DivideAndConquer.hpp"
+#include "algo/Sort.hpp"
 
 #include <algorithm>
 #include <iostream>
@@ -27,7 +28,39 @@ int median_of_2_helper(const std::vector<int>& half1, int half1_left, int half1_
     return median_of_2_helper(half1, half1_left, mid1_pos + (len % 2 == 0 ? 1 : 0), half2, mid2_pos, half2_right);
 }
 
+
+int significant_inversion_count_helper_rec(std::vector<int>& a, int left, int right)
+{
+    if (left >= right) {
+        return 0;
+    }
+
+    int mid = (right + left - 1) / 2;
+    int invs_left = significant_inversion_count_helper_rec(a, left, mid);
+    int invs_right = significant_inversion_count_helper_rec(a, mid + 1, right);
+    
+    ///counting the significant inversiont
+    int left_i = left;
+    int right_i = mid + 1;
+    int inv_current = 0;
+    
+    while (left_i <= mid && right_i <= right) {
+        if (a[left_i] > 2 * a[right_i]) {
+            inv_current += mid - left_i + 1;
+            ++right_i;
+        } else {
+            ++left_i;
+        }
+    }
+    
+    pc::algo::merge(a, left, mid, right);
+
+
+    return invs_left + invs_right + inv_current;
+}   
+    
 }
+
 namespace pc {
 namespace algo {
 
@@ -39,7 +72,8 @@ int median_of_array_divided_into_2_sorted_arrays(const std::vector<int>& p1, con
 
 int significant_inversion_count(const std::vector<int>& a)
 {
-    return 0;
+    auto arr = a;
+    return significant_inversion_count_helper_rec(arr, 0, a.size() - 1);
 }
 
 int significant_inversion_count_bad(const std::vector<int>& a)
@@ -47,7 +81,7 @@ int significant_inversion_count_bad(const std::vector<int>& a)
     int res = 0;
     for (int i = 0; i < a.size() - 1; ++i) {
         for (int j = i + 1; j < a.size(); ++j) {
-            if (a[i] < a[j] * 2) {
+            if (a[i] > a[j] * 2) {
                 ++res;
             }
         }   

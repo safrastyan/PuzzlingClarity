@@ -3,6 +3,25 @@
 
 namespace {
 
+void merge_sort_rec(std::vector<int>& arr, int left, int right)
+{
+    if (left >= right) {
+        return;
+    }
+
+    int mid = (right + left - 1) / 2;
+    merge_sort_rec(arr, left, mid);
+    merge_sort_rec(arr, mid + 1, right);
+    pc::algo::merge(arr, left, mid, right);
+}
+
+}
+
+
+namespace pc {
+namespace algo {
+
+
 void merge(std::vector<int>& arr, int left, int middle, int right)
 {
     std::vector<int> left_arr;
@@ -36,25 +55,6 @@ void merge(std::vector<int>& arr, int left, int middle, int right)
         ++k;
     }
 }
-
-void merge_sort_rec(std::vector<int>& arr, int left, int right)
-{
-    if (left >= right) {
-        return;
-    }
-
-    int mid = (right + left - 1) / 2;
-    merge_sort_rec(arr, left, mid);
-    merge_sort_rec(arr, mid + 1, right);
-    merge(arr, left, mid, right);
-}
-
-
-}
-
-
-namespace pc {
-namespace algo {
 
 
 std::vector<int> bubble_sort(const std::vector<int>& arr)
