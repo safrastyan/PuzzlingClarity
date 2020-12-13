@@ -27,6 +27,15 @@ BOOST_AUTO_TEST_CASE(random_string_alnum_test)
 
 }
 
+BOOST_AUTO_TEST_CASE(random_string_hq_test)
+{
+    for (int i = 0; i < 100; ++i) {
+        int n = std::rand() % 200 + 1;
+        BOOST_CHECK_EQUAL(random_string_hq(n).size(), n);
+    }
+
+}
+
 
 
 BOOST_AUTO_TEST_SUITE_END()
