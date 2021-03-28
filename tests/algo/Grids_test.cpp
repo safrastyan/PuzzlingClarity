@@ -1,4 +1,4 @@
-#define BOOST_TEST_MODULE Graphs
+#define BOOST_TEST_MODULE Grids
 #include <boost/test/unit_test.hpp>
 
 #include "algo/Grids.hpp"
@@ -7,7 +7,7 @@
 using namespace pc::algo;
 using namespace pc::Comparators;
 
-BOOST_AUTO_TEST_SUITE(Graph_tests)
+BOOST_AUTO_TEST_SUITE(Grids_tests)
 
 
 BOOST_AUTO_TEST_CASE(Grid_equality_check_check)
