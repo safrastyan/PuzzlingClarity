@@ -42,6 +42,5 @@ private:
 
 }
 }
-}
 
 #include "algo/HashTable_impl.hpp"
