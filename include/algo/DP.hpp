@@ -1,4 +1,4 @@
-///This file contains common tasks which require dynamic programming approacch
+/// This file contains common tasks which require dynamic programming approacch
 
 #include <vector>
 

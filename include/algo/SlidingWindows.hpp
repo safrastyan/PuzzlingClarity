@@ -21,4 +21,4 @@ std::vector<int> sliding_window_sums(const std::vector<int>& elems,  int k);
 std::vector<int> sliding_window_unique_chars(const std::string& s, int k);
 
 }
-} 
+}
