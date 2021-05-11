@@ -15,13 +15,13 @@ std::vector<char> digits(int n);
 /// check primeness
 bool is_prime(int n);
 
-///length fo the number
+/// length fo the number
 int len(int n);
 
-///returns the numbe reverse
+/// returns the numbe reverse
 int reverse(int n);
 
-///concat
+/// concat
 int concat(int x, int y);
 
 /// returns a list of prime numbers in the given range, that are palindromes

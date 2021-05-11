@@ -14,7 +14,7 @@ std::vector<std::vector<T>> generate_all_subsets(const std::vector<T>&);
 /// pass verbose=true if you want detailed output
 std::vector<std::vector<int>> k_almost_equal_subsets(const std::vector<int>& a, int k, bool verbose=false);
 
-///intersect the second set with the first, the result is stored in the first
+/// intersect the second set with the first, the result is stored in the first
 void intersect_with(std::set<int>& s1, const std::set<int>& s2);
 
 }
