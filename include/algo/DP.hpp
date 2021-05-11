@@ -26,5 +26,13 @@ int knapsack_infinte_elements(const std::vector<int>& elems, int k);
  **/
 int knapsack_classic(const std::vector<std::pair<int, int>>& elems, int k);
 
+
+/**
+ * @brief Infinite number of coins of different values and a number N. Calculate the number of ways it is possible to form n. 
+ * @param coins the array containing values of different coins. 
+ * @param n the desired change we want to form with the coins.
+ **/
+int coin_exchange(const std::vector<int>& coins, int n);
+
 }
 }

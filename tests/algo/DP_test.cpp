@@ -47,4 +47,18 @@ BOOST_AUTO_TEST_CASE(knapsack_classic_test)
     }
 }
 
+BOOST_AUTO_TEST_CASE(coin_exchange_corner_case_test)
+{
+    BOOST_CHECK_EQUAL(coin_exchange({1, 2, 5}, 0), 1);
+    BOOST_CHECK_EQUAL(coin_exchange({2, 4, 8}, 11), 0);
+    BOOST_CHECK_EQUAL(coin_exchange({}, 0), 0);
+}
+
+BOOST_AUTO_TEST_CASE(coin_exchange_test)
+{
+    BOOST_CHECK_EQUAL(coin_exchange({1, 2, 3}, 4), 4);
+    BOOST_CHECK_EQUAL(coin_exchange({2, 5, 3, 6}, 10), 5);
+}
+
+
 BOOST_AUTO_TEST_SUITE_END()
