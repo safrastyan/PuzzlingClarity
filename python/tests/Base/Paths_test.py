@@ -13,8 +13,7 @@ class TestPathMethods(unittest.TestCase):
         self.assertTrue(len(Paths.resource_path()) > 0)
         self.assertTrue(len(Paths.resource_path()) > len(Paths.path()))
     
-    def test_python_path(self):
-        self.assertTrue(os.environ["PYTHONPATH"].find(Names.Project.projectName) != -1)
+    
 
 if __name__ == '__main__':
     unittest.main()
