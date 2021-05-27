@@ -6,6 +6,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cassert>
+#include <numeric>
 
 using namespace pc::algo;
 using namespace pc::Time;

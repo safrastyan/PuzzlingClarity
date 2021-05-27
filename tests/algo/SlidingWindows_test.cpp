@@ -8,6 +8,8 @@
 #include "Generators/ArrayGenerators.hpp"
 #include "Generators/TextGenerators.hpp"
 
+#include <numeric>
+
 using namespace pc::algo;
 using namespace pc::base::paths;
 using namespace pc::io;

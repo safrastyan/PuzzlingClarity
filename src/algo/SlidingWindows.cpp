@@ -1,6 +1,7 @@
 #include "algo/SlidingWindows.hpp"
 
 #include <algorithm>
+#include <numeric>
 
 namespace pc {
 namespace algo {

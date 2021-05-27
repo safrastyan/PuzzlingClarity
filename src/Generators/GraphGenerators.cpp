@@ -17,7 +17,7 @@ std::vector<std::vector<int>> graph(int nodes, int edges, bool directed)
             all.push_back(std::make_pair(i, j));
         }
     }
-    std::srand(time(0));
+    std::srand(time_t(0));
     std::random_shuffle(all.begin(), all.end());
     for (int i = 0; i < edges; ++i) {
         auto x = all[i].first;

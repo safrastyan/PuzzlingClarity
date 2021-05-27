@@ -19,5 +19,15 @@ BOOST_AUTO_TEST_CASE(random_number_test)
 }
 
 
+BOOST_AUTO_TEST_CASE(random_number_negative_test)
+{
+    for (int i = 0; i < 100; ++i) {
+        auto n = random_number(-100, -1);
+        BOOST_CHECK(n >= -100 && n <= -1);
+    }
+
+}
+
+
 
 BOOST_AUTO_TEST_SUITE_END()
