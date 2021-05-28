@@ -4,6 +4,8 @@
 #include "Generators/ArrayGenerators.hpp"
 
 #include <algorithm>
+#include <numeric>
+
 
 BOOST_AUTO_TEST_SUITE(ArrayGenerators_tests)
 
