@@ -14,9 +14,9 @@ public:
 
     BigInt(const BigInt& other);
 
-    BigInt operator=(const BigInt& other);
+    BigInt& operator=(const BigInt& other);
 
-    BigInt operator-();
+    BigInt operator-() const;
 
     BigInt& operator++();
     BigInt& operator--();
@@ -40,7 +40,7 @@ public:
 
 private:
     std::vector<short> m_num;
-    bool is_negative;
+    bool m_negative;
 };
 
 }
