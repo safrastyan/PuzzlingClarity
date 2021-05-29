@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 namespace pc {
 namespace algo {
@@ -37,6 +38,11 @@ public:
 
     bool operator==(const BigInt& other) const;
     bool operator<(const BigInt& other) const;
+    bool operator<=(const BigInt& other) const;
+    bool operator>(const BigInt& other) const;
+    bool operator>=(const BigInt& other) const;
+
+    friend std::ostream& operator<<(std::ostream& os, const BigInt& bigint);
 
 private:
     std::vector<short> m_num;
