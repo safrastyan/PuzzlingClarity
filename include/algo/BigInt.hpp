@@ -43,12 +43,21 @@ public:
     bool operator>(const BigInt& other) const;
     bool operator>=(const BigInt& other) const;
 
-    std::string to_sting() const;
+    BigInt abs() const;
+
+    std::string to_string() const;
     friend std::ostream& operator<<(std::ostream& os, const BigInt& bigint);
 
 private:
     std::vector<short> m_num;
     bool m_negative;
+
+    // Add the absolute values of two bigints and assign to the first one 
+    static void add_abs(BigInt& a, const BigInt& b);
+    // Subtract the absolute value of b from a and assign to a
+    static void sub_abs(BigInt& a, const BigInt& b);
+    // Subtract the absolute value of b from a and assign to a, works for a >= b
+    static void sub_abs_impl(BigInt& a, const BigInt& b);
 };
 
 }

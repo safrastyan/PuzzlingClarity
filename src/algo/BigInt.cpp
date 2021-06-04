@@ -53,8 +53,34 @@ BigInt& BigInt::operator--(){}
 BigInt BigInt::operator++(int){}
 BigInt BigInt::operator--(int){}
 
-BigInt BigInt::operator+(const BigInt& other) const{}
-BigInt BigInt::operator-(const BigInt& other) const{}
+BigInt BigInt::operator+(const BigInt& other) const
+{
+    BigInt res = *this;
+    if (res.m_negative == other.m_negative) {
+        BigInt::add_abs(res, other);
+        res.m_negative = other.m_negative;
+    }
+    else {
+        BigInt::sub_abs(res, other);
+        res.m_negative = res.m_negative == other.m_negative;
+    }
+    return res;
+}
+
+BigInt BigInt::operator-(const BigInt& other) const
+{
+    BigInt res = *this;
+    if (res.m_negative == other.m_negative) {
+        BigInt::sub_abs(res, other);
+        res.m_negative = res.m_negative != other.m_negative;
+    }
+    else {
+        BigInt::add_abs(res, other);
+        res.m_negative = !other.m_negative;
+    }
+    return res;
+}
+
 BigInt BigInt::operator*(const BigInt& other) const{}
 BigInt BigInt::operator/(const BigInt& other) const{}
 BigInt BigInt::operator%(const BigInt& other) const{}
@@ -137,13 +163,20 @@ bool BigInt::operator>=(const BigInt& other) const
     return *this == other || *this > other;
 }
 
-std::string BigInt::to_sting() const
+BigInt BigInt::abs() const 
+{
+    BigInt bigint = *this;
+    bigint.m_negative = false;
+    return bigint;
+}
+
+std::string BigInt::to_string() const
 {
     std::string str = "";
     if (m_negative) {
         str += "-";
     }
-    for (int i = m_num.size()-1; i >= 0; i--) {
+    for (int i = m_num.size() - 1; i >= 0; --i) {
         str += '0' + m_num[i];
     }
     return str;
@@ -151,8 +184,68 @@ std::string BigInt::to_sting() const
 
 std::ostream& operator<<(std::ostream& os, const BigInt& bigint)
 {
-    os << bigint.to_sting();
+    os << bigint.to_string();
     return os;
+}
+
+void BigInt::add_abs(BigInt& a, const BigInt& b) 
+{
+    std::size_t len = std::max(a.m_num.size(), b.m_num.size());
+    a.m_num.resize(len, 0);
+    short carry = 0;
+    for (int i = 0; i < len; ++i) {
+        short res = a.m_num[i] + carry;
+        if (i < b.m_num.size()) {
+            res += b.m_num[i];
+        }
+        a.m_num[i] = res % 10;
+        carry = res / 10;
+    }
+    if (carry > 0) {
+        a.m_num.push_back(carry);
+    }
+    a.m_negative = false;
+}
+
+
+void BigInt::sub_abs(BigInt& a, const BigInt& b) 
+{
+    if (a.abs() >= b.abs()) {
+        sub_abs_impl(a, b);
+    }
+    else {
+        BigInt res = b;
+        sub_abs_impl(res, a);
+        a.m_num = res.m_num;
+        a.m_negative = true;
+    }
+}
+
+void BigInt::sub_abs_impl(BigInt& a, const BigInt& b) 
+{
+        
+    short carry = 0;
+    for (int i = 0; i < a.m_num.size(); ++i) {
+        short sub = carry;
+        carry = 0;
+        if (i < b.m_num.size()) {
+            sub += b.m_num[i];
+        }
+        if (a.m_num[i] < sub) {
+            a.m_num[i] += 10 - sub;
+            carry = 1;
+        }
+        else {
+            a.m_num[i] -= sub;
+        }
+    }
+    for (int i = a.m_num.size()-1; i > 0; --i) {
+        if (a.m_num[i] != 0) {
+            break;
+        }
+        a.m_num.pop_back();
+    }
+    a.m_negative = false;
 }
 
 }
