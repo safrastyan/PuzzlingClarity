@@ -37,11 +37,13 @@ public:
     BigInt& operator%=(const BigInt& other);
 
     bool operator==(const BigInt& other) const;
+    bool operator!=(const BigInt& other) const;
     bool operator<(const BigInt& other) const;
     bool operator<=(const BigInt& other) const;
     bool operator>(const BigInt& other) const;
     bool operator>=(const BigInt& other) const;
 
+    std::string to_sting() const;
     friend std::ostream& operator<<(std::ostream& os, const BigInt& bigint);
 
 private:

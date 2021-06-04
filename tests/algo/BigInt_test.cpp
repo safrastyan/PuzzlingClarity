@@ -5,25 +5,13 @@
 #include "Base/Paths.hpp"
 #include "io/io.hpp"
 
+#include <string>
+
 using namespace pc::algo;
 using namespace pc::base::paths;
 using namespace pc::io;
 
 BOOST_AUTO_TEST_SUITE(BigInt_tests)
-
-BOOST_AUTO_TEST_CASE(bigint_constructor_test)
-{
-    BOOST_CHECK_EQUAL(BigInt("-123"), BigInt(-123));
-    BOOST_CHECK_NE(BigInt("-1233"), BigInt(-123));
-    BOOST_CHECK_LT(BigInt("123"), BigInt("234"));
-    BOOST_CHECK_LT(BigInt("123"), BigInt("1344"));
-    BOOST_CHECK_LT(BigInt("-123"), BigInt("1344"));
-    BOOST_CHECK_LT(BigInt("-12"), BigInt("-11"));
-    BOOST_CHECK_LE(BigInt("-12"), BigInt("-11"));
-    // BOOST_CHECK_EQUAL(BigInt("-1"), BigInt("-11"));
-    BOOST_CHECK_LT(BigInt("-1"), BigInt("-11"));
-    BOOST_CHECK_LE(BigInt("-1"), BigInt("-11"));
-}
 
 
 // BOOST_AUTO_TEST_CASE(bigint_arithm_test)
@@ -36,14 +24,43 @@ BOOST_AUTO_TEST_CASE(bigint_constructor_test)
 //     }
 // }
 
-// BOOST_AUTO_TEST_CASE(bigint_logic_test)
-// {
-//     std::string path = algo_tests_path() + "/bigint/bigint_logic";
-//     for (int t = 1; t <= 1; ++t) {
-//         std::fstream input(path + std::to_string(t) + ".in");        
-//         std::fstream output(path + std::to_string(t) + ".out");
-        
-//     }
-// }
+
+//TODO: make the number of tests dynamic
+
+BOOST_AUTO_TEST_CASE(bigint_logic_test)
+{
+    std::string path = algo_tests_path() + "/bigint/bigint_logic/";
+    for (int t = 1; t <= 2; ++t) {
+        std::fstream input(path + std::to_string(t) + ".in");        
+        std::fstream output(path + std::to_string(t) + ".out");
+        auto cases = read_one<int>(input);
+        for (int c = 0; c < cases; ++c) {
+            auto num1 = BigInt(read_one<std::string>(input));   
+            auto oper = read_one<std::string>(input);
+            auto num2 = BigInt(read_one<std::string>(input));
+            auto res = read_one<int>(output) == 1;
+            bool test_res = true;
+            if (oper == "<") {
+                test_res = num1 < num2;
+            }
+            if (oper == ">") {
+                test_res = num1 > num2;
+            }
+            if (oper == "==") {
+                test_res = num1 == num2;
+            }
+            if (oper == "<=") {
+                test_res = num1 <= num2;
+            }
+            if (oper == ">=") {
+                test_res = num1 >= num2;
+            }
+            if (oper == "!=") {
+                test_res = num1 != num2;
+            }
+            BOOST_CHECK_EQUAL(test_res, res);
+        }
+    }
+}
 
 BOOST_AUTO_TEST_SUITE_END()
