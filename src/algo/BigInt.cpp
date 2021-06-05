@@ -48,36 +48,43 @@ BigInt BigInt::operator-() const
     return bigint;
 }
 
-BigInt& BigInt::operator++(){}
-BigInt& BigInt::operator--(){}
-BigInt BigInt::operator++(int){}
-BigInt BigInt::operator--(int){}
+BigInt& BigInt::operator++()
+{
+    *this += 1;
+    return *this;
+}
+
+BigInt& BigInt::operator--()
+{
+    *this -= 1;
+    return *this;
+}
+
+BigInt BigInt::operator++(int)
+{
+    BigInt res = *this;
+    *this += 1;
+    return res;
+}
+
+BigInt BigInt::operator--(int)
+{
+    BigInt res = *this;
+    *this -= 1;
+    return res;
+}
 
 BigInt BigInt::operator+(const BigInt& other) const
 {
     BigInt res = *this;
-    if (res.m_negative == other.m_negative) {
-        BigInt::add_abs(res, other);
-        res.m_negative = other.m_negative;
-    }
-    else {
-        BigInt::sub_abs(res, other);
-        res.m_negative = res.m_negative == other.m_negative;
-    }
+    res += other;
     return res;
 }
 
 BigInt BigInt::operator-(const BigInt& other) const
 {
     BigInt res = *this;
-    if (res.m_negative == other.m_negative) {
-        BigInt::sub_abs(res, other);
-        res.m_negative = res.m_negative != other.m_negative;
-    }
-    else {
-        BigInt::add_abs(res, other);
-        res.m_negative = !other.m_negative;
-    }
+    res -= other;
     return res;
 }
 
@@ -85,8 +92,30 @@ BigInt BigInt::operator*(const BigInt& other) const{}
 BigInt BigInt::operator/(const BigInt& other) const{}
 BigInt BigInt::operator%(const BigInt& other) const{}
 
-BigInt& BigInt::operator+=(const BigInt& other){}
-BigInt& BigInt::operator-=(const BigInt& other){}
+BigInt& BigInt::operator+=(const BigInt& other)
+{
+    if (this->m_negative == other.m_negative) {
+        BigInt::add_abs(*this, other);
+        this->m_negative = other.m_negative;
+    }
+    else {
+        BigInt::sub_abs(*this, other);
+        this->m_negative = this->m_negative == other.m_negative;
+    }
+}
+
+BigInt& BigInt::operator-=(const BigInt& other)
+{
+    if (this->m_negative == other.m_negative) {
+        BigInt::sub_abs(*this, other);
+        this->m_negative = this->m_negative != other.m_negative;
+    }
+    else {
+        BigInt::add_abs(*this, other);
+        this->m_negative = !other.m_negative;
+    }
+}
+
 BigInt& BigInt::operator*=(const BigInt& other){}
 BigInt& BigInt::operator/=(const BigInt& other){}
 BigInt& BigInt::operator%=(const BigInt& other){}

@@ -4,6 +4,7 @@
 #include "algo/BigInt.hpp"
 #include "Base/Paths.hpp"
 #include "io/io.hpp"
+#include "Generators/NumberGenerators.hpp"
 
 #include <string>
 
@@ -33,7 +34,7 @@ BOOST_AUTO_TEST_CASE(bigint_arithm_test)
             if (oper == "-") {
                 test_res = num1 - num2;
             }
-            BOOST_CHECK_MESSAGE(test_res == res, num1.to_string() + " " + num2.to_string() + " = " + test_res.to_string());
+            BOOST_CHECK_EQUAL(test_res, res);
         }
     }
 }
@@ -76,5 +77,46 @@ BOOST_AUTO_TEST_CASE(bigint_logic_test)
         }
     }
 }
+
+BOOST_AUTO_TEST_CASE(bigint_unary_test)
+{
+    std::string path = algo_tests_path() + "/bigint/bigint_unary/";
+    for (int t = 1; t <= 1; ++t) {
+        std::fstream input(path + std::to_string(t) + ".in");        
+        std::fstream output(path + std::to_string(t) + ".out");
+        auto cases = read_one<int>(input);
+        for (int c = 0; c < cases; ++c) {
+            auto num1 = BigInt(read_one<std::string>(input));
+            auto num2 = num1; 
+            auto oper = read_one<std::string>(input);
+            auto res = BigInt(read_one<std::string>(output));
+            BigInt test_res = 0;
+            BigInt old_val = 0;
+            if (oper == "++") {
+                test_res = ++num1;
+                BOOST_CHECK_EQUAL(num1, res);
+                BOOST_CHECK_EQUAL(test_res, res);
+                old_val = num2;
+                test_res = num2++;
+                BOOST_CHECK_EQUAL(num2, res);
+                BOOST_CHECK_EQUAL(test_res, old_val);
+            }
+            if (oper == "--") {
+                test_res = --num1;
+                BOOST_CHECK_EQUAL(num1, res);
+                BOOST_CHECK_EQUAL(test_res, res);
+                old_val = num2;
+                test_res = num2--;
+                BOOST_CHECK_EQUAL(num2, res);
+                BOOST_CHECK_EQUAL(test_res, old_val);
+            }
+            if (oper == "-") {
+                test_res = -num1;
+                BOOST_CHECK_EQUAL(test_res, res);
+            }
+        }
+    }
+}
+
 
 BOOST_AUTO_TEST_SUITE_END()

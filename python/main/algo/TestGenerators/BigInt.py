@@ -63,5 +63,20 @@ def generate_arithm_test():
     return inputs, outputs
 
 
-inputs, outputs = generate_arithm_test()
+def generate_unary_test():
+    inputs = []
+    outputs = []
+    for i in [-1, 1]:
+        for _ in range(100):
+            num = randint(i)
+            inputs.append(str(num) + ' ++')
+            outputs.append(str(num+1))
+            inputs.append(str(num) + ' --')
+            outputs.append(str(num-1))
+            inputs.append(str(num) + ' -')
+            outputs.append(str(-num))
+    return inputs, outputs
+
+
+inputs, outputs = generate_unary_test()
 save_test(inputs, outputs)
