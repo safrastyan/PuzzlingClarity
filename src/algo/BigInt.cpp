@@ -1,5 +1,7 @@
 #include "algo/BigInt.hpp"
 
+#include <algorithm>
+
 namespace pc {
 namespace algo {
 
@@ -21,6 +23,9 @@ BigInt::BigInt(long long num): m_negative(false)
         m_negative = true;
         num *= -1;
     }
+    if (num == 0) {
+        m_num.push_back(0);
+    }
     while (num > 0)
     {
         m_num.push_back(num % 10);
@@ -28,10 +33,8 @@ BigInt::BigInt(long long num): m_negative(false)
     }
 }
 
-BigInt::BigInt(const BigInt& other)
+BigInt::BigInt(const BigInt& other) : m_negative(other.m_negative), m_num(other.m_num)
 {
-    m_negative = other.m_negative;
-    m_num = other.m_num;
 }
 
 BigInt& BigInt::operator=(const BigInt& other)
@@ -88,9 +91,23 @@ BigInt BigInt::operator-(const BigInt& other) const
     return res;
 }
 
-BigInt BigInt::operator*(const BigInt& other) const{}
-BigInt BigInt::operator/(const BigInt& other) const{}
-BigInt BigInt::operator%(const BigInt& other) const{}
+BigInt BigInt::operator*(const BigInt& other) const
+{
+    return mul(*this, other);
+}
+
+BigInt BigInt::operator/(const BigInt& other) const
+{
+    return div(*this, other);
+}
+
+BigInt BigInt::operator%(const BigInt& other) const
+{
+    BigInt res = *this / other;
+    res = *this - res * other;
+    res.m_negative = this->m_negative;
+    return res;
+}
 
 BigInt& BigInt::operator+=(const BigInt& other)
 {
@@ -102,6 +119,7 @@ BigInt& BigInt::operator+=(const BigInt& other)
         BigInt::sub_abs(*this, other);
         this->m_negative = this->m_negative == other.m_negative;
     }
+    return *this;
 }
 
 BigInt& BigInt::operator-=(const BigInt& other)
@@ -114,11 +132,32 @@ BigInt& BigInt::operator-=(const BigInt& other)
         BigInt::add_abs(*this, other);
         this->m_negative = !other.m_negative;
     }
+    return *this;
 }
 
-BigInt& BigInt::operator*=(const BigInt& other){}
-BigInt& BigInt::operator/=(const BigInt& other){}
-BigInt& BigInt::operator%=(const BigInt& other){}
+BigInt& BigInt::operator*=(const BigInt& other)
+{
+    BigInt res = mul(*this, other);
+    this->m_negative = res.m_negative;
+    this->m_num = res.m_num;
+    return *this;
+}
+
+BigInt& BigInt::operator/=(const BigInt& other)
+{
+    BigInt res = div(*this, other);
+    this->m_negative = res.m_negative;
+    this->m_num = res.m_num;
+    return *this;
+}
+
+BigInt& BigInt::operator%=(const BigInt& other)
+{
+    BigInt res = *this % other;
+    this->m_negative = res.m_negative;
+    this->m_num = res.m_num;
+    return *this;
+}
 
 bool BigInt::operator==(const BigInt& other) const
 {
@@ -236,7 +275,6 @@ void BigInt::add_abs(BigInt& a, const BigInt& b)
     a.m_negative = false;
 }
 
-
 void BigInt::sub_abs(BigInt& a, const BigInt& b) 
 {
     if (a.abs() >= b.abs()) {
@@ -268,13 +306,112 @@ void BigInt::sub_abs_impl(BigInt& a, const BigInt& b)
             a.m_num[i] -= sub;
         }
     }
-    for (int i = a.m_num.size()-1; i > 0; --i) {
+    for (int i = a.m_num.size() - 1; i > 0; --i) {
         if (a.m_num[i] != 0) {
             break;
         }
         a.m_num.pop_back();
     }
     a.m_negative = false;
+}
+
+BigInt BigInt::mul(const BigInt& a, const BigInt& b)
+{
+    BigInt res(0);
+    if (a == 0 || b == 0) {
+        return res;
+    }
+    for (int i = 0; i < b.m_num.size(); ++i) {
+        BigInt tmp(0);
+        for (int j = 0; j < i; ++j) {
+            tmp.m_num.push_back(0);
+        }
+        for (int j = 0; j < a.m_num.size(); ++j) {
+            short num = b.m_num[i] * a.m_num[j];
+            short num1 = num % 10;
+            short num2 = num / 10;
+            int ind = j  + i;
+            if (tmp.m_num.size() <= ind) {
+                tmp.m_num.push_back(0);
+            }
+            short sum = tmp.m_num[ind] + num1;
+            num1 = sum % 10;
+            num2 += sum / 10;
+            tmp.m_num[ind] = num1;
+            if (num2 > 0) {
+                tmp.m_num.push_back(num2);
+            }
+        }
+        res += tmp;
+    }
+    res.m_negative = a.m_negative != b.m_negative;
+    return res;
+}
+
+BigInt BigInt::div(const BigInt& a, const BigInt& b)
+{
+    if (b == 0) {
+        throw "Zero division";
+    }
+    BigInt num1 = a.abs();
+    BigInt num2 = b.abs();
+    if (num1 < num2) {
+        return 0;
+    }
+    BigInt res("");
+    bool last_zero = false;
+    int last_len = 0;
+    while (num1.m_num.size() > 0) {
+        BigInt tmp("");
+        int digit = 0;
+        if (num1.m_num[num1.m_num.size() - 1] == 0) {
+            res.m_num.push_back(0);
+            num1.m_num.pop_back();
+            continue;
+        }
+        for (int i = num1.m_num.size() - 1; i >= 0; --i) {
+            tmp.m_num = std::vector<short>(num1.m_num.begin() + i, num1.m_num.end());
+            if (tmp >= num2) {
+                break;
+            }
+        }
+        if (res.m_num.size() > 0) {
+            for (int i = 0; i < (int)tmp.m_num.size() - last_len - 1; ++i) {
+                res.m_num.push_back(0);
+            }
+        }
+        if (tmp < num2) {
+            if ((int)tmp.m_num.size() - last_len > 0) {
+                res.m_num.push_back(0);
+            }
+            break;
+        }
+        for (int i = 1; i < 10; ++i) {
+            if (num2 * i > tmp) {
+                break;
+            }
+            digit = i;
+        }
+        int sz = tmp.m_num.size();
+        res.m_num.push_back(digit);
+        tmp -= num2 * digit;
+        last_zero = false;
+        last_len = tmp.m_num.size();
+        if (tmp == 0) {
+            tmp.m_num.pop_back();
+            last_zero = true;
+            last_len = 0;
+        }
+        for (int i = 0; i < sz; ++i) {
+            num1.m_num.pop_back();
+        }
+        for (int i = 0; i < tmp.m_num.size(); ++i) {
+            num1.m_num.push_back(tmp.m_num[i]);
+        }
+    }
+    std::reverse(res.m_num.begin(), res.m_num.end());
+    res.m_negative = a.m_negative != b.m_negative;
+    return res;
 }
 
 }

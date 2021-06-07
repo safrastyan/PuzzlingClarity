@@ -58,6 +58,10 @@ private:
     static void sub_abs(BigInt& a, const BigInt& b);
     // Subtract the absolute value of b from a and assign to a, works for a >= b
     static void sub_abs_impl(BigInt& a, const BigInt& b);
+
+    static BigInt mul(const BigInt& a, const BigInt& b);
+
+    static BigInt div(const BigInt& a, const BigInt& b);
 };
 
 }

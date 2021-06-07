@@ -18,7 +18,7 @@ BOOST_AUTO_TEST_SUITE(BigInt_tests)
 BOOST_AUTO_TEST_CASE(bigint_arithm_test)
 {
     std::string path = algo_tests_path() + "/bigint/bigint_arithm/";
-    for (int t = 1; t <= 1; ++t) {
+    for (int t = 0; t <= 2; ++t) {
         std::fstream input(path + std::to_string(t) + ".in");        
         std::fstream output(path + std::to_string(t) + ".out");
         auto cases = read_one<int>(input);
@@ -34,7 +34,16 @@ BOOST_AUTO_TEST_CASE(bigint_arithm_test)
             if (oper == "-") {
                 test_res = num1 - num2;
             }
-            BOOST_CHECK_EQUAL(test_res, res);
+            if (oper == "*") {
+                test_res = num1 * num2;
+            }
+            if (oper == "/") {
+                test_res = num1 / num2;
+            }
+            if (oper == "%") {
+                test_res = num1 % num2;
+            }
+            BOOST_CHECK_MESSAGE(test_res == res, num1.to_string() + " " + oper+" " + num2.to_string() + " = "+ test_res.to_string()+ " = "+ res.to_string());
         }
     }
 }

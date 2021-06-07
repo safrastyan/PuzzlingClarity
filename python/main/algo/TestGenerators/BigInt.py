@@ -3,11 +3,11 @@ import sys
 
 
 logical_operators = ['>', '<', '==', '>=', '<=', '!=']
-arithmetic_operators = ['+', '-']
+arithmetic_operators = ['+', '-', '*', '/', '%']
 
 
-def randint(sign):
-    pow = random.randint(1, 100)
+def randint(sign, max_pow=100):
+    pow = random.randint(1, max_pow)
     if sign > 0:
         return random.randint(0, 10**pow)
     return random.randint(-10**pow, 0)
@@ -57,9 +57,18 @@ def generate_arithm_test():
                 num1 = randint(i)
                 num2 = randint(j)
                 for operator in arithmetic_operators:
+                    if num2 == 0 and operator in ['/', '%']:
+                        continue
                     expr = str(num1) + ' ' + operator + ' ' + str(num2)
                     inputs.append(expr)
-                    outputs.append(str(int(eval(expr))))
+                    if operator == '/':
+                        expr = i * j * ((i * num1) // (j * num2))
+                        outputs.append(str(expr))
+                    elif operator == '%':
+                        expr = i * ((i * num1) % (j * num2))
+                        outputs.append(str(expr))
+                    else:
+                        outputs.append(str(eval(expr)))
     return inputs, outputs
 
 
@@ -78,5 +87,5 @@ def generate_unary_test():
     return inputs, outputs
 
 
-inputs, outputs = generate_unary_test()
+inputs, outputs = generate_arithm_test()
 save_test(inputs, outputs)
