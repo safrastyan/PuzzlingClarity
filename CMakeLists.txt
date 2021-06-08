@@ -1,7 +1,8 @@
-cmake_minimum_required (VERSION 2.8)
+cmake_minimum_required (VERSION 2.8.12)
+SET(CMAKE_CXX_COMPILER /usr/bin/g++)
+SET(CMAKE_C_COMPILER /usr/bin/gcc)
 project(PuzzlingClarity)
 SET(CMAKE_BUILD_TYPE Release)
-SET(CMAKE_CXX_COMPILER /usr/bin/g++)
 add_definitions(-std=c++14 -g -O0)
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
