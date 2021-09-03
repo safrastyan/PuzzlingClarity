@@ -44,9 +44,6 @@ void write(const T& obj, const std::string& str = std::string(), std::ostream& o
  * Reading functions, less generic, more to the point
  */
 
-/// Read the file line by line until the end treating all of them as strings
-std::vector<std::string> read_dictionary(std::istream& in);
-
 
 /// Read one thing, number, string, float.
 template<typename T>
@@ -64,6 +61,28 @@ std::vector<T> read_array_u(std::istream&);
 /// Read an array where the first input comes as a number of elements, after thait pairs of elements, correspndingly wiht type T and U
 template<typename T, typename U>
 std::vector<std::pair<T, U>> read_array(std::istream&); 
+
+/**
+ * @brief Reads the graph with the following format. First 2 numbers, N and M representing the number of nodes
+ *                  and the number of edges respectively. Then reads M lines, each with 2 values, source node connected to destination node. 
+ * @param directed. If False, the reader will treat it is indirected graph and will make sure to have 2 entries in the adhacency list 
+ *                   for each pair [i, j], one entry in the i-th row, another in the j-th row. 
+ **/
+std::vector<std::vector<int>> read_graph(std::istream&, bool directed = false);
+
+/// Same as above, but also reads weights
+std::vector<std::vector<std::pair<int, int>>> read_graph_w(std::istream&, bool directed = false);
+
+/// Same as read graph, but will read n - 1 edges by default, there is no M input.
+std::vector<std::vector<int>> read_tree(std::istream&, bool directed = false);
+
+/// Same as above for weighted trees
+std::vector<std::vector<std::pair<int, int>>> read_tree_w(std::istream&, bool directed = false);
+
+
+/// Read the file line by line until the end treating all of them as strings
+std::vector<std::string> read_dictionary(std::istream& in);
+
 
 }
 }
