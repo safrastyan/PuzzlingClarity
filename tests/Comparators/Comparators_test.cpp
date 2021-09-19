@@ -17,4 +17,10 @@ BOOST_AUTO_TEST_CASE(is_same_tmp_vectors_test)
     BOOST_CHECK(!pc::Comparators::is_same(a, b));
 }
 
+BOOST_AUTO_TEST_CASE(same_double_test)
+{
+    pc::Comparators::same_double(1, 1.00000001);
+}
+
+
 BOOST_AUTO_TEST_SUITE_END()
