@@ -4,15 +4,15 @@
 
 #include <iostream>
 
-using namespace pc::Games::AndharBahar;
+using namespace pc::Games::Card32;
 using namespace pc::Games;
 
 int main(int argc, char** argv)
 {
     int n = std::stoi(argv[1]);
-    std::cout << "Running Andhar Bahar on " << n << " games... " << std::endl;
+    std::cout << "Running Lottoland Card 32 live on " << n << " games... " << std::endl;
 
-    auto [g, bets] = Configs::lottoland_andhar_bahar();
+    auto [g, bets] = Configs::lottoland_32_card_live();
     
     auto states = collect<decltype(g)>(g, n);
 

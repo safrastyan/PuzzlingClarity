@@ -14,8 +14,8 @@ namespace Games {
 class Deck
 {
 public:
-    /// Standard is a 52 card deck, Double is double 52 cards deck, Small is 36 card deck
-    enum class Type : char { Small, Standard, Double };
+    /// Standard is a 52 card deck, Double is double 52 cards deck, Small is 36 card deck, Card32 is small deck without Aces
+    enum class Type : char { Small, Standard, Double, Card32 };
     Deck(Type t = Type::Standard);
 
     /// read only, returns the top card
@@ -46,6 +46,7 @@ private:
     void initializeStandard();
     void initializeSmall();
     void initializeDouble();
+    void initializeCard32();
 
     /// vector keeps the cards bottom up, first card is the bottom most and the last card is the topmost
     std::vector<Card> m_cards;
@@ -71,6 +72,8 @@ inline Deck::Deck(Type t)
     case Type::Double:
         initializeDouble();
         break;
+    case Type::Card32:
+        initializeCard32();
     }
 }
 
@@ -127,7 +130,7 @@ inline void Deck::initializeStandard()
 {
     for (auto s : Card::commonSuits) {
         for (int i = 1; i <= 13; ++i) {
-            m_cards.push_back(Card(static_cast<Card::Value>(i), s));
+            m_cards.emplace_back(static_cast<Card::Value>(i), s);
         }
     }
 }
@@ -136,8 +139,9 @@ inline void Deck::initializeSmall()
 {
     for (auto s : Card::commonSuits) {
         for (int i = 6; i <= 13; ++i) {
-            m_cards.push_back(Card(static_cast<Card::Value>(i), s));
+            m_cards.emplace_back(static_cast<Card::Value>(i), s);
         }
+        m_cards.emplace_back(Card::Value::Ace, s);
     }
 }
 
@@ -146,6 +150,16 @@ inline void Deck::initializeDouble()
     initializeStandard();
     initializeStandard();
 }
+
+inline void Deck::initializeCard32()
+{
+  for (auto s : Card::commonSuits) {
+        for (int i = 6; i <= 13; ++i) {
+            m_cards.emplace_back(static_cast<Card::Value>(i), s);
+        }
+    }
+}
+
 
 inline std::ostream& operator << (std::ostream& out, const Deck& h)
 {
