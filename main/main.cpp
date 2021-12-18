@@ -1,13 +1,7 @@
-#include "algo/DateAndTime.hpp"
-#include "algo/Grids.hpp"
-#include "algo/Numbers.hpp"
-#include "algo/Strings.hpp"
-#include "algo/Trie.hpp"
-
 #include <iostream>
 
 int main()
 {
-    std::cout << "New Beginning" << std::endl;
+    std::cout << "Puzzl;ling is the best" << std::endl;
     return 0;
 }
