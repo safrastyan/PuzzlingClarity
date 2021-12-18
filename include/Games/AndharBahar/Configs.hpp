@@ -10,7 +10,7 @@ namespace pc {
 namespace Games {
 namespace Configs {
 
-std::pair<AndharBahar::Game, std::vector<Bet<AndharBahar::Game::State>>> lottoland_andhar_bahar();
+std::pair<AndharBahar::Game, std::vector<Bet<AndharBahar::Game::State>>> lottoland_andhar_bahar_live();
 
 }
 }
@@ -21,7 +21,7 @@ namespace pc {
 namespace Games {
 namespace Configs {
 
-std::pair<AndharBahar::Game, std::vector<Bet<AndharBahar::Game::State>>> lottoland_andhar_bahar()
+std::pair<AndharBahar::Game, std::vector<Bet<AndharBahar::Game::State>>> lottoland_andhar_bahar_live()
 {
     AndharBahar::Game g;
     std::vector<Bet<AndharBahar::Game::State>> bets;

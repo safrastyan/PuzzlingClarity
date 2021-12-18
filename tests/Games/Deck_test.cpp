@@ -18,6 +18,13 @@ BOOST_AUTO_TEST_CASE(Size_test)
     BOOST_CHECK_EQUAL(d.size(), 51);
     d.add(c);
     BOOST_CHECK_EQUAL(d.size(), 52);
+
+    Deck ddd(Deck::Type::Small);
+    BOOST_CHECK_EQUAL(ddd.size(), 36);
+
+    ddd = Deck(Deck::Type::Card32);
+    BOOST_CHECK_EQUAL(ddd.size(), 32);
+
 }
 
 BOOST_AUTO_TEST_CASE(discard)

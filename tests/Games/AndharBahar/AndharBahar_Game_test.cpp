@@ -10,6 +10,7 @@ BOOST_AUTO_TEST_SUITE(AndharBahar_test)
 
 BOOST_AUTO_TEST_CASE(flow_test)
 {
+    ///TODO poor test
     Game g;
     auto res = g.play(true);
     std::cout << "Reuslts " << std::endl;
