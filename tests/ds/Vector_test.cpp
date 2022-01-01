@@ -52,6 +52,10 @@ BOOST_AUTO_TEST_CASE(Functional_test)
         sv.pop_back();
         BOOST_CHECK(same(v, sv));
     }
+
+
+    Vector<int> vv;
+    BOOST_CHECK(vv.empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

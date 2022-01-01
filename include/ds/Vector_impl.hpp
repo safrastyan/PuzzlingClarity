@@ -41,6 +41,13 @@ inline size_t Vector<T>::size() const noexcept
 {
     return m_size;
 }
+
+template<typename T>
+inline bool Vector<T>::empty() const noexcept
+{
+    return m_size == 0;
+}
+    
     
 template<typename T>
 inline size_t Vector<T>::capacity() const noexcept

@@ -19,6 +19,7 @@ public:
 
 
     size_t size() const noexcept;
+    bool empty() const noexcept;
     size_t capacity() const noexcept;
     T& back();
     T operator[](int) const;
