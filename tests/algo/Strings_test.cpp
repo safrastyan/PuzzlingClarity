@@ -23,4 +23,15 @@ BOOST_AUTO_TEST_CASE(hamming_distance_test)
     
 }
 
+BOOST_AUTO_TEST_CASE(is_correct_bracket_expr_test)
+{
+    std::vector<std::string> correct{"", "(){}[]{}", "(((())))[[{}]]"};
+    std::vector<std::string> incorrect{"(", ")", "(()", "{)}"};
+    for (auto& s: correct) {
+        BOOST_CHECK(is_correct_bracket_expr(s));
+    }
+    for (auto& s: incorrect) {
+        BOOST_CHECK(!is_correct_bracket_expr(s));
+    }
+}
 BOOST_AUTO_TEST_SUITE_END()

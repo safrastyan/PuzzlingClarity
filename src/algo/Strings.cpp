@@ -1,6 +1,14 @@
 #include "algo/Strings.hpp"
 
 #include <cassert>
+#include <stack>
+
+namespace {
+bool matching(char c1, char c2)
+{
+    return (c1 == '(' && c2 == ')') || (c1 == '[' && c2 == ']') || (c1 == '{' && c2 == '}');
+}
+}
 
 namespace pc {
 namespace algo {
@@ -25,6 +33,24 @@ int hamming_distance(const std::string& s1, const std::string& s2)
         }
     }
     return res;
+}
+
+bool is_correct_bracket_expr(const std::string& s)
+{
+    std::stack<char> stack;
+    for (auto c: s) {
+        if (stack.empty()) {
+            stack.push(c);
+            continue;
+        }
+        auto cc = stack.top();
+        if (matching(cc, c)) {
+            stack.pop();
+            continue;
+        }
+        stack.push(c);
+    }
+    return stack.empty();
 }
 
 }
