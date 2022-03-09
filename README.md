@@ -7,7 +7,7 @@
 
 1. Cmake 
 2. clang++ (optional, works with g++ as well)
-3. Boost >= 1.50
+3. Boost >= 1.55
 4. Python 3
 
 ## Configs
