@@ -4,7 +4,7 @@
 #include <string>
 
 namespace pc {
-namespace algo {
+namespace ds {
 
 struct TNode
 {

@@ -1,5 +1,10 @@
 #pragma once 
 
+
+namespace pc {
+namespace ds {
+
+
 template<typename KEY, typename VAL>
 inline HashTable<KEY, VAL>::HashTable(int size): m_table(size)
 {}
@@ -56,4 +61,8 @@ void HashTable<KEY, VAL>::replace_element(const KEY& key, const VAL& new_val)
             return;
         }
     }
+}
+
+
+}
 }

@@ -1,8 +1,8 @@
-#include "algo/Trie.hpp"
+#include "ds/Trie.hpp"
 
 
 namespace pc {
-namespace algo {
+namespace ds {
 
 TNode::TNode(): nodes(26, nullptr)
                      , is_word(false)

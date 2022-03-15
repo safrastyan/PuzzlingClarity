@@ -1,9 +1,9 @@
 #define BOOST_TEST_MODULE Trie
 #include <boost/test/unit_test.hpp>
 
-#include "algo/Trie.hpp"
+#include "ds/Trie.hpp"
 
-using namespace pc::algo;
+using namespace pc::ds;
 
 BOOST_AUTO_TEST_SUITE(Trie_tests)
 

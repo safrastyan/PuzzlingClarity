@@ -6,7 +6,7 @@
 
 
 namespace pc {
-namespace algo {
+namespace ds {
 
 /// KEY_TYPE is the KEY_TYPE for the hash function. We are using this to combine all the points a, b, c and d into one class
 template<typename KEY, typename VAL>
@@ -43,4 +43,4 @@ private:
 }
 }
 
-#include "algo/HashTable_impl.hpp"
+#include "ds/HashTable_impl.hpp"
