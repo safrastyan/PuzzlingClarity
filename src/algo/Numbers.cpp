@@ -2,6 +2,15 @@
 
 #include <algorithm>
 #include <cmath>
+#include <map>
+
+namespace {
+std::vector<std::pair<int, std::string>> int_roman_map{{1000, "M"}, {900, "CM"}, {500, "D"}, {400, "CD"}, {100, "C"}, {90, "XC"},
+                                                    {50, "L"}, {40, "XL"}, {10, "X"}, {9, "IX"}, {5, "V"}, {4, "IV"}, {1, "I"} };
+
+std::map<char , int> roman_chars ={{'I',1}, {'V',5}, {'X',10}, {'L',50}, {'C',100}, {'D',500}, {'M',1000}};
+       
+}
 
 namespace pc {
 namespace algo {
@@ -106,25 +115,36 @@ std::string full_binary(int num, int length)
     while (num != 0) {
         s[i] = '0' + num % 2;
         num /= 2;
-        ++i;
+    ++i;
     }
     return s;
 }
 
-std::string to_roman(int n) 
+std::string int_to_roman(int n) 
 {
     std::string res;
-    static std::vector<int> num{1,4,5,9,10,40,50,90,100,400,500,900,1000};
-    static std::vector<std::string> sym{"I","IV","V","IX","X","XL","L","XC","C","CD","D","CM","M"};
-    int i = 12;  
-    while (n >0 ) {
-        int div = n / num[i];
-        n = n % num[i];
-        while(div--) {
-            res += sym[i];
+    for (int i = 0; n != 0; ++i) {
+        auto r = int_roman_map[i];
+        int c = n / r.first;
+        n %= r.first;
+        for (int j = 0; j < c; ++j) {
+            res += r.second;
         }
-        i--;
     }
+    return res;
+}
+
+int roman_to_int(const std::string& n)
+{
+    int res = 0;
+    for(int i = 0 ; i < n.size()- 1 ; ++i){
+        if (roman_chars[n[i]] < roman_chars[n[i+1]]) {
+            res -= roman_chars[n[i]];
+            continue;
+        }
+        res += roman_chars[n[i]];
+    }
+    res += roman_chars[n[n.size()-1]];
     return res;
 }
 

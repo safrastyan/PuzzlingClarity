@@ -88,11 +88,19 @@ BOOST_AUTO_TEST_CASE(full_binary_test)
     
 }
 
-BOOST_AUTO_TEST_CASE(to_roman_test)
+BOOST_AUTO_TEST_CASE(int_to_roman_test)
 {
-    BOOST_CHECK_EQUAL(to_roman(1), "I");
-    BOOST_CHECK_EQUAL(to_roman(4), "IV");
-    BOOST_CHECK_EQUAL(to_roman(9), "IX");
+    BOOST_CHECK_EQUAL(int_to_roman(1), "I");
+    BOOST_CHECK_EQUAL(int_to_roman(4), "IV");
+    BOOST_CHECK_EQUAL(int_to_roman(9), "IX");
+}
+
+BOOST_AUTO_TEST_CASE(roman_to_int_test)
+{
+    BOOST_CHECK_EQUAL(roman_to_int("I"), 1);
+    BOOST_CHECK_EQUAL(roman_to_int("IV"), 4);
+    BOOST_CHECK_EQUAL(roman_to_int("IX"), 9);
+
 }
 
 BOOST_AUTO_TEST_CASE(sieve_prime_numbers_test)

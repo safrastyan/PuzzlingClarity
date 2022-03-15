@@ -34,7 +34,8 @@ int gcd(int a, int b);
 std::string full_binary(int number, int length);
 
 /// convert to roman
-std::string to_roman(int n);
+std::string int_to_roman(int n);
+int roman_to_int(const std::string& num);
 
 /// The sieve of eratostenes. Generates and return all the prime numbers from 1 to n included
 std::vector<int> sieve_prime_numbers(int n);
