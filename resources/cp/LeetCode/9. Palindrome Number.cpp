@@ -1,15 +1,17 @@
 class Solution {
 public:
-    bool isPalindrome(int x) {
-        if (x < 0) {
-            return false;
-        }
-        std::string n = std::to_string(x);
-        for (int i = 0; i < n.size() / 2; ++i) {
-            if (n[i] != n[n.size() - 1 - i]) {
+    
+    bool is_palindrome(const std::string& s)
+    {
+        for (int i = 0; i < s.size() / 2; ++i) {
+            if (s[i] != s[s.size() - i - 1]) {
                 return false;
             }
         }
         return true;
+    }
+    bool isPalindrome(int x) 
+    {
+        return is_palindrome(std::to_string(x));
     }
 };
