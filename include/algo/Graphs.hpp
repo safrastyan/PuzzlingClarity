@@ -15,7 +15,7 @@ using Graph_t=std::vector<std::vector<std::pair<int, T>>>;
 
 
 /// Calculate the shortest path length in a graph from src to dst node. -1 if no path exists
-int shortest_path(const Graph& g, int src, int dst);
+int shortest_path_length(const Graph& g, int src, int dst);
 
 
 

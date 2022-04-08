@@ -40,6 +40,8 @@ inline std::string tasks_test_path()
     return tests_path() + "/tasks";
 }
 
+inline 
+
 }
 }
 }

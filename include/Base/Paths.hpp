@@ -15,6 +15,8 @@ std::string io_tests_path();
 std::string linx_standard_dictionary_path();
 std::string tasks_test_path();
 
+///resources
+
 
 }
 }
