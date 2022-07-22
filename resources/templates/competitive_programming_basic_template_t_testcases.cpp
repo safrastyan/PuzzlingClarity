@@ -15,12 +15,15 @@
 
 using namespace std;
 
+void solve(int t)
+{
+}
 int main()
 {
 	int t;
 	cin >> t;
 	for (int k = 0; k < t; ++k) {
-
+            solve(k);		
 	}
 	
 	return 0;

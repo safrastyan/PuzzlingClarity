@@ -1,4 +1,5 @@
 /// This file contains common tasks which require dynamic programming approacch
+#pragma once
 
 #include <vector>
 
