@@ -29,6 +29,40 @@ int main()
 {
 	std::ios::sync_with_stdio(false);
 
+	std::string s;
+	std::string target = "atcoder";
+
+	std::cin >> s;
+
+	std::unordered_set<std::string> mark;
+	
+	std::queue<std::pair<std::string, int>> q;
+
+	q.push(std::make_pair(s, 0));
+	mark.insert(s);
+	while (!q.empty()) {
+		auto t = q.front();
+		q.pop();
+		auto ss = t.first;
+
+		int dist = t.second;
+		
+		if (ss == target) {
+			std::cout << dist << std::endl;
+			return 0;
+		}
+		
+		for (int i = 0; i < ss.size() - 1; ++i) {
+			auto cur = ss;
+			std::swap(cur[i], cur[i + 1]);
+			if (mark.find(cur) == mark.end()) {
+				mark.insert(cur);
+				q.push(std::make_pair(cur, dist + 1));
+			}
+		}
+
+	}
+
 	return 0;
 }
 

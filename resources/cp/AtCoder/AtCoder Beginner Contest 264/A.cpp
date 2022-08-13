@@ -28,7 +28,12 @@ using ull = unsigned long long;
 int main()
 {
 	std::ios::sync_with_stdio(false);
-
+	std::string s = "atcoder";
+	int a, b;
+	std::cin >> a >> b;
+	for (int i = a; i <= b; ++i) {
+		std::cout<< s[i - 1];
+	}
 	return 0;
 }
 

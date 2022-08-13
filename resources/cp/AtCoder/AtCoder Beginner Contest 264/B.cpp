@@ -28,7 +28,28 @@ using ull = unsigned long long;
 int main()
 {
 	std::ios::sync_with_stdio(false);
+	int r, c;
+	std::cin >> r >> c;
+	int n = 15;
 
+	vc<vc<int>> a(n, vc<int>(n, 0));
+
+	for (int i = 0; i < n / 2; i += 2) {
+		for (int j = i; j < n - i; ++j) {
+			a[i][j] = 1;
+			a[i][n - j - 1] = 1;
+			a[n - i - 1][j] = 1;
+			a[n - i - 1][n - j - 1] = 1;
+
+			a[j][i] = 1;
+			a[n - j - 1][i] = 1;
+			a[j][n - i - 1] = 1;
+			a[n - j - 1][n - i - 1] = 1;
+		}
+	}
+
+	
+	std::cout << (a[r - 1][c - 1] == 1 ? "black" : "white") << std::endl;
 	return 0;
 }
 
