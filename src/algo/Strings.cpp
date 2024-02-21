@@ -60,6 +60,17 @@ bool is_vowel(char c)
     return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
 }
 
+std::vector<std::string> split(const std::string& s)
+{
+    std::stringstream ss(s);
+    std::vector<std::string> res;
+    std::string word;
+    while (ss >> word) {
+        res.push_back(word);
+    }
+    return res;
+}
+
 
 }
 }
