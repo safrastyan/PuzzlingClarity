@@ -13,6 +13,7 @@ bool matching(char c1, char c2)
 namespace pc {
 namespace algo {
 
+
 bool is_palindrome(const std::string& s)
 {
     for (int i = 0; i < s.size() / 2; ++i) {
@@ -52,6 +53,13 @@ bool is_correct_bracket_expr(const std::string& s)
     }
     return stack.empty();
 }
+
+bool is_vowel(char c)
+{
+    c = std::tolower(c);
+    return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+}
+
 
 }
 }
