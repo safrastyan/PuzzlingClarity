@@ -18,7 +18,5 @@ using Graph_t=std::vector<std::vector<std::pair<int, T>>>;
 int shortest_path_length(const Graph& g, int src, int dst);
 
 
-
-
 }
 }

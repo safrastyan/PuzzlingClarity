@@ -29,5 +29,8 @@ bool operator == (const Grid& g1, const Grid& g2);
 
 std::ostream& operator << (std::ostream& o, const Grid& g);
 
+
+/// TODO generic flood fill function
+
 }
 }
