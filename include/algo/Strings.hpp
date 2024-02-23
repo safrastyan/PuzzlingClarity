@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <vector>
+#include <sstream>
 
 namespace pc {
 namespace algo {
@@ -11,12 +13,11 @@ int hamming_distance(const std::string&, const std::string&);
 
 bool is_correct_bracket_expr(const std::string&);
 
-bool is_vowel(char);   /// TODO add a unit test for this
+bool is_vowel(char);   
 
 /// Splits the string into words by spaces 
-std::vector<std::string> split(const std::string&); ////TODO add unit tests for this
+std::vector<std::string> split(const std::string&);
 
 
-///TODO bring a string splitting function here
 }
 }
