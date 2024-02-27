@@ -7,18 +7,14 @@
 # Data Structures module
 
   Hash Table &#10004; 
-  
   Stack &#10004; 
-  
   Trie &#10004; 
-  
   Vector &#10004; 
-  
-  Queue 
-
+  Queue
   Segment Tree &#10004; 
-
+  BST
   
+
 # Prerequisites
 
 ## Tools and libraries
