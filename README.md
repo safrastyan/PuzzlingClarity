@@ -1,7 +1,24 @@
 # Almost everything in this repo is explained in the youtube channel  https://www.youtube.com/channel/UCmaGePaRecLjqZKHtGVY83w/
 
+# Algo Module
+ 
+ ## 
 
+# Data Structures module
 
+  Hash Table &#10004; 
+  
+  Stack &#10004; 
+  
+  Trie &#10004; 
+  
+  Vector &#10004; 
+  
+  Queue 
+
+  Segment Tree &#10004; 
+
+  
 # Prerequisites
 
 ## Tools and libraries
