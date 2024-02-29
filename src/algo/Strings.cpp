@@ -152,6 +152,30 @@ int edit_distance(const std::string& word1, const std::string& word2)
     return dp[n][m];
 }
 
+std::vector<int> z_function(const std::string& s) {
+    std::vector<int> z(s.size(), 0);
+    int l = 0;
+    int r = 0;
+    for (int i = 1; i != s.size(); ++i) {
+        if (r >= i) {
+            z[i] = std::min(z[i - l], r - i + 1);
+        }
+    
+        while (z[i] + i < s.size() && s[i + z[i]] == s[z[i]]) {
+            z[i]++;
+        }
+
+        if (z[i] <= r - i + 1) {
+            continue;
+        }
+        l = i;
+        r = i + z[i] - 1;
+    }
+    
+    return z;
+}
+
+
 bool pattern_match(const std::string& s, const std::string& p)
 {
     bool ans = false;

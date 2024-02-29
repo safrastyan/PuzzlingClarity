@@ -23,7 +23,7 @@ int edit_distance(const std::string& word1, const std::string& word2);
 
 
 /// calculate the z function for the string
-std::vector<int> z_function(const std::string& s);   /// TODO
+std::vector<int> z_function(const std::string& s);
 
 /// Check if the given string matches a patterns which contains '.' (wildcard symbol) and '*' symbol
 bool pattern_match(const std::string& s, const std::string& p);
