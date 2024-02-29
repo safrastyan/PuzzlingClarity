@@ -58,11 +58,15 @@ BOOST_AUTO_TEST_CASE(edit_distance_test)
     
 }
 
+
+///TODO add tests for z_function
+
 BOOST_AUTO_TEST_CASE(pattern_match_test)
 {
     BOOST_CHECK(!pattern_match("aa", "a"));
     BOOST_CHECK(pattern_match("aa", "a*"));
     BOOST_CHECK(pattern_match("ab", ".*"));
 }
+
 
 BOOST_AUTO_TEST_SUITE_END()
