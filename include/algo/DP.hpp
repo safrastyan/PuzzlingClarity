@@ -35,5 +35,8 @@ int knapsack_classic(const std::vector<std::pair<int, int>>& elems, int k);
  **/
 int coin_exchange(const std::vector<int>& coins, int n);
 
+int longest_increasing_subsequence_length(const std::vector<int>&);
+
+
 }
 }

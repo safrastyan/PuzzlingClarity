@@ -60,5 +60,11 @@ BOOST_AUTO_TEST_CASE(coin_exchange_test)
     BOOST_CHECK_EQUAL(coin_exchange({2, 5, 3, 6}, 10), 5);
 }
 
+BOOST_AUTO_TEST_CASE(longest_increasing_subsequence_length_test)
+{
+    BOOST_CHECK_EQUAL(longest_increasing_subsequence_length(std::vector<int>{10,9,2,5,3,7,101,18}), 4);
+    BOOST_CHECK_EQUAL(longest_increasing_subsequence_length(std::vector<int>{0,1,0,3,2,3}), 4);
+    BOOST_CHECK_EQUAL(longest_increasing_subsequence_length(std::vector<int>{7,7,7,7,7,7,7}), 1);
+}
 
 BOOST_AUTO_TEST_SUITE_END()
