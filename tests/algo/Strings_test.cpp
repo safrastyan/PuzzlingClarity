@@ -47,7 +47,14 @@ BOOST_AUTO_TEST_CASE(split_test)
     BOOST_CHECK_EQUAL(split(" ").size(), 0);
     auto v = split("a b c d");
     BOOST_CHECK_EQUAL(v.size(), 4);
-    BOOST_CHECK_EQUAL(v[1], "a");
+    BOOST_CHECK_EQUAL(v[0], "a");
 
+}
+
+BOOST_AUTO_TEST_CASE(edit_distance_test)
+{
+    BOOST_CHECK_EQUAL(edit_distance("horse", "ros"), 3);
+    BOOST_CHECK_EQUAL(edit_distance("intention", "execution"), 5);
+    
 }
 BOOST_AUTO_TEST_SUITE_END()

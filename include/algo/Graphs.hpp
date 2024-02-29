@@ -21,7 +21,7 @@ int shortest_path_length(const Graph& g, int src, int dst);
 
 
 /// Perform prim's algorithm to calculate the minimum spanning tree
-int prim_minimum_spanning_tree(const Graph_w&);
+int prim_minimum_spanning_tree(const std::vector<std::vector<std::pair<int, int>>>&);
 
 
 }

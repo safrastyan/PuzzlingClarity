@@ -19,7 +19,7 @@ bool is_vowel(char);
 std::vector<std::string> split(const std::string&);
 
 /// calculate the edit distance. Minimum distance to fund 
-int edit_distance(const std::string& s1, const std::string& s2);    ///TODO
+int edit_distance(const std::string& word1, const std::string& word2);    ///TODO
 
 
 /// calculate the z function for the string
