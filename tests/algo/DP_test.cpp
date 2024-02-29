@@ -67,4 +67,11 @@ BOOST_AUTO_TEST_CASE(longest_increasing_subsequence_length_test)
     BOOST_CHECK_EQUAL(longest_increasing_subsequence_length(std::vector<int>{7,7,7,7,7,7,7}), 1);
 }
 
+BOOST_AUTO_TEST_CASE(longest_common_subsequence_length_test)
+{
+    BOOST_CHECK_EQUAL(longest_common_subsequence_length("abcde", "ace"), 3);
+    BOOST_CHECK_EQUAL(longest_common_subsequence_length("abc", "abc"), 3);
+    BOOST_CHECK_EQUAL(longest_common_subsequence_length("abc", "def"), 0);
+    
+}
 BOOST_AUTO_TEST_SUITE_END()

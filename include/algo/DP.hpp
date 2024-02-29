@@ -1,6 +1,7 @@
 /// This file contains common tasks which require dynamic programming approacch
 #pragma once
 
+#include <string>
 #include <vector>
 
 namespace pc {
@@ -36,6 +37,11 @@ int knapsack_classic(const std::vector<std::pair<int, int>>& elems, int k);
 int coin_exchange(const std::vector<int>& coins, int n);
 
 int longest_increasing_subsequence_length(const std::vector<int>&);
+
+int longest_common_subsequence_length(const std::string& , const std::string&);
+
+
+///TODO would be nice to have generic functions for different types for LIS and LCS
 
 
 }
