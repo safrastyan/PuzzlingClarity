@@ -1,5 +1,6 @@
 #include "algo/Graphs.hpp"
 
+#include <limits>
 #include <vector>
 #include <queue>
 
@@ -66,6 +67,62 @@ int prim_minimum_spanning_tree(const std::vector<std::vector<std::pair<int, int>
     ///TODO fix this
 }
 
+std::vector<int> dijkstra(const std::vector<std::vector<std::pair<int, int>>>& a, int src)
+{
+    int n = a.size();
+    std::vector<int> dist(n, std::numeric_limits<int>::max());
+    std::vector<char> mark(n, 0);
+    dist[src] = 0;
+    mark[src] = 1;
+    std::priority_queue<std::pair<int, int>> q;
+    q.push(std::make_pair(0, src));
+
+    while (!q.empty()) {
+        auto elem = q.top();
+        q.pop();
+        int old_dist = -elem.first;
+        int node = elem.second;
+        
+
+        for (int i = 0; i < a[node].size(); ++i) {
+            int new_node = a[node][i].first;
+            int new_dist = a[node][i].second;
+            if (mark[new_node] == 1) {
+                continue;
+            }
+            if (new_dist + old_dist >= dist[new_node]) {
+                continue;
+            }
+            dist[new_node] = new_dist + old_dist;
+            q.push(std::make_pair(-(new_dist + old_dist), new_node));
+            mark[new_node] = 1;
+        }
+    }
+    return dist;
+}
+
+std::vector<std::vector<int>> floyd_warshall(const std::vector<std::vector<std::pair<int, int>>>& a)
+{
+    int n = a.size();
+    std::vector<std::vector<int>> dist(n, std::vector<int>(n, std::numeric_limits<int>::max()));
+
+    for (int i = 0; i < n; ++i) {
+        dist[i][i] = 0;
+    }
+
+    for (int k = 0; k < n; ++k) {
+        for (int i = 0; i < n; ++i) {
+
+            for (int j = 0; j < n; ++j) {
+                if (dist[k][j] == std::numeric_limits<int>::max() || dist[i][k] == std::numeric_limits<int>::max()) {
+                    continue;
+                }
+                dist[i][j] = std::min(dist[i][j], dist[i][k] + dist[k][j]);
+            }
+        }
+    }
+    return dist;
+}
 
 }
 }
