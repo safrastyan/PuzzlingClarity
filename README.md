@@ -1,6 +1,6 @@
 #  Puzzling Clarity 
 
-  ## More info at puzzlingclarity.com 
+  ## More info at https://puzzlingclarity.com 
 
 # Algo Module
  
@@ -119,8 +119,11 @@
 ## Build
 
 `mkdir build`
+
 `cd build`
+
 `cmake ..`
+
 `make`
 
 ## Configs
