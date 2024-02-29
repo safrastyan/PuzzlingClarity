@@ -116,8 +116,8 @@ BOOST_AUTO_TEST_CASE(Grid_fill_connected_component)
                                              {'9', 'x', '7'}  });  
     fill_connected_component(g, 0, 0, 'x');
     BOOST_CHECK(g == cor);
+    ///TODO add tests for the generic one as well
 }
-
 
 
 BOOST_AUTO_TEST_SUITE_END()

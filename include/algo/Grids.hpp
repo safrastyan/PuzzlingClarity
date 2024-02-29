@@ -30,7 +30,22 @@ bool operator == (const Grid& g1, const Grid& g2);
 std::ostream& operator << (std::ostream& o, const Grid& g);
 
 
+/// @brief This function will fill the given grid's connected component on the starting coordinate with the new element
+/// @tparam T 
+/// @param grid 2D vector of elements
+/// @param row row of the starting point
+/// @param col column of the starting point
+/// @param elem new element to fill with
+/// @param diagonal boolean parameter. If false, the connected component will be taken account only on 4 directions. If true, 8
+
+/// @return the new grid
+template<typename T> 
+std::vector<std::vector<T>> fill_connected_component_t(const std::vector<std::vector<T>>& grid, int row, int col, const T& elem, bool diagonal = false);
+
+
 /// TODO generic flood fill function
 
 }
 }
+
+#include "algo/Grids_impl.hpp"
