@@ -1,6 +1,6 @@
 #  Puzzling Clarity 
 
-  ## More info at https://puzzlingclarity.com 
+  ## More info at https://puzzlingclarity.com . Consulting services and Coaching services available.
 
 # Algo Module
  
